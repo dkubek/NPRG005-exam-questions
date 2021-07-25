@@ -8,20 +8,25 @@
 
 Zdroj: [MFF Forum: Zkoužka 4.9.2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12095&sid=fe143536d7d0b2e925781a412fafbdc8)
 
-Je dán orientovaný graf G pomocí seznamů sousedů. Zjistěte, jestli lze graf G topologicky uspořádat a pokud ano, vydejte seznam vrcholů v topologickém pořadí.
+Je dán orientovaný graf G pomocí seznamů sousedů. Zjistěte, jestli lze graf G
+topologicky uspořádat a pokud ano, vydejte seznam vrcholů v topologickém
+pořadí.
 
 Příklad:
 
 ```prolog
 ?- topo([a-[],b-[a,c],c-[a],d-[a,c]],Usp).
-Usp=[b,d,c,a]
+Usp = [b,d,c,a]
 ```
 
  1) Definujte příslušný predikát topo/2 v jazyce Prolog.
  2) Odhadněte časovou složitost vašeho řešení. Odhad zdůvodněte.
- 3) Jsou některé z vašich predikátů koncově rekurzivní ? Pokud ano, vysvětlete, které to jsou, a jaký to má význam. Pokud ne, vysvětlete, zdali by se dal některý takto upravit. 
+ 3) Jsou některé z vašich predikátů koncově rekurzivní ? Pokud ano, vysvětlete,
+ které to jsou, a jaký to má význam. Pokud ne, vysvětlete, zdali by se dal
+ některý takto upravit.
 
 Řešení:
+
 ```prolog
 remove_vertex([], _, []).
 remove_vertex([ Vertex-_ | Graph ], Vertex, Out) :-
@@ -51,9 +56,14 @@ topo_(Graph, Acc, Out) :-
 
 Zdroj: [MFF Forum: Zkoužka 4.9.2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12095&sid=fe143536d7d0b2e925781a412fafbdc8)
 
-Napište predikát ``diskr/2``, který dostane binární strom (s konstruktory ``t/3`` a ``nil/0``) a vrátí seznam seznamů vrcholů stromu, kde v jednom vnitřním seznamu jsou všechny vrcholy, ke kterým se při průchodu od kořene dostaneme se stejným počtem kroků doprava. Vnější seznam je od nejlevější vrstvy, na pořadí ve vnitřních seznamech nezáleží.
+Napište predikát ``diskr/2``, který dostane binární strom (s konstruktory
+``t/3`` a ``nil/0``) a vrátí seznam seznamů vrcholů stromu, kde v jednom
+vnitřním seznamu jsou všechny vrcholy, ke kterým se při průchodu od kořene
+dostaneme se stejným počtem kroků doprava. Vnější seznam je od nejlevější
+vrstvy, na pořadí ve vnitřních seznamech nezáleží.
 
 Příklad:
+
 ```
 ?- diskr(t( t(t(nil,a,nil),b,t(nil,c,nil)),
             d,
@@ -64,10 +74,16 @@ V = [[a,b,d],[c,g,e],[f,h],[i]]
 ```
 
 1. Definujte příslušný predikát ``diskr/2.``
-2. Je ve vašem řešení použit řez (!) nebo negace? Pokud ano, změní se něco, když řez / negaci vypustíme? Pokud ne, dal by se řez / negace někde smysluplně využít?
-3. Lze u predikátu ``diskr/2`` obrátit směr výpočtu? Podrobněji: dle příkladu předpokládáme volání diskr(+,-). Bude fungovat i volání diskr(-, +), tj. zadáme seznam diskrepančních vrstev, a na výstupu obdržíme strom? Vysvětlete. 
+2. Je ve vašem řešení použit řez (!) nebo negace? Pokud ano, změní se něco,
+   když řez / negaci vypustíme? Pokud ne, dal by se řez / negace někde
+   smysluplně využít?
+3. Lze u predikátu ``diskr/2`` obrátit směr výpočtu? Podrobněji: dle příkladu
+   předpokládáme volání diskr(+,-). Bude fungovat i volání diskr(-, +), tj.
+   zadáme seznam diskrepančních vrstev, a na výstupu obdržíme strom?
+   Vysvětlete.
 
 Řešení:
+
 ```prolog
 diskr(Tree, V) :-
     diskr_(Tree, 0, NodeRightCount),
@@ -130,15 +146,18 @@ test_tree(
 
 Zdroj: [MFF Forum: Zkouška 16. 7. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12089&sid=fe143536d7d0b2e925781a412fafbdc8)
 
-Cílem úlohy je definovat predikát allTrees, který pro daný seznam hladin vygeneruje všechny možné binární stromy.
+Cílem úlohy je definovat predikát allTrees, který pro daný seznam hladin
+vygeneruje všechny možné binární stromy.
 
- - Hladinou rozumíme seznam prvků, které se nacházejí ve stejné hloubce
- - Můžete předpokládat, že každá hladina má nanejvýš dvojnásobek prvků předchozí hladiny (ale může jich mít méně).
- - Hladiny vygenerovaného stromu musejí odpovídat hladinám specifikovaných ve vstupním seznamu.
+- Hladinou rozumíme seznam prvků, které se nacházejí ve stejné hloubce
+- Můžete předpokládat, že každá hladina má nanejvýš dvojnásobek prvků předchozí
+  hladiny (ale může jich mít méně).
+- Hladiny vygenerovaného stromu musejí odpovídat hladinám specifikovaných ve
+  vstupním seznamu.
 
 Např. pro seznam ``[[1],[2,3],[4]]`` dostaneme následující 4 stromy:
 
-```
+```none
    1
  2   3
 4
@@ -159,9 +178,11 @@ Např. pro seznam ``[[1],[2,3],[4]]`` dostaneme následující 4 stromy:
  1. Popište zvolenou reprezentaci binárních stromů.
  2. Definujte predikát ``allTrees/2``.
  3. Stručně vysvětlete, proč je vaše definice korektní.
- 4. Lze vaší definici použít opačným směrem? Tj. nalezne váš predikát seznam hladin pokud specifikujete pouze výsledný strom? Vysvětlete.
+ 4. Lze vaší definici použít opačným směrem? Tj. nalezne váš predikát seznam
+    hladin pokud specifikujete pouze výsledný strom? Vysvětlete.
 
 Řešení:
+
 ```prolog
 level_to_forest([], [], []).
 level_to_forest([X | Xs], [Left, Right | Rest], [t( Left, X, Right ) | Ans]) :-
@@ -185,12 +206,14 @@ all_trees([Level | Levels], Forest, Ans) :-
     all_trees(Levels, NewForest, Ans).
 ```
 
-
 ### Bipartitní rozklad grafu
 
 Zdroj: [MFF Forum: Zkouška 16. 7. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12089&sid=fe143536d7d0b2e925781a412fafbdc8)
 
-Je zadán neorientovaný graf *G* a množina vrcholů *M*. Zjistěte, zda *M* a doplněk *M* tvoří bipartitní rozklad grafu *G* (tj. každá hrana grafu má právě jeden koncový vrchol v množině *M*). Pokud ano, vydejte druhou množinu rozkladu.
+Je zadán neorientovaný graf *G* a množina vrcholů *M*. Zjistěte, zda *M* a
+doplněk *M* tvoří bipartitní rozklad grafu *G* (tj. každá hrana grafu má právě
+jeden koncový vrchol v množině *M*). Pokud ano, vydejte druhou množinu
+rozkladu.
 
 ```prolog
 ?- bip([a-[c,d], b-[d], c-[a], d-[a,b]], [a,b], D).
@@ -204,6 +227,7 @@ Je zadán neorientovaný graf *G* a množina vrcholů *M*. Zjistěte, zda *M* a 
  2. Napište o jednotlivých predikátech ve vašem řešení, zda jsou koncově rekurzivní.
 
 Řešení:
+
 ```prolog
 % collect_nodes(+Graph, -Nodes) is true when Nodes are all the nodes in Graph
 % in sorted order.
@@ -253,25 +277,31 @@ does_not_contain(List, X) :- \+ member(X, List).
 
 Zdroj: [MFF Forum: Zkouška 24. 6. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12078&sid=fe143536d7d0b2e925781a412fafbdc8)
 
-Truhlář má dostatek trámů délky ``D`` a seznam ``Xs`` délek trámů, které potřebuje nařezat. V seznamu ``Xs`` se délky mohou opakovat.
+Truhlář má dostatek trámů délky ``D`` a seznam ``Xs`` délek trámů, které
+potřebuje nařezat. V seznamu ``Xs`` se délky mohou opakovat.
 
 Cílem problému je sestavit predikát ``rezy(+D, +Xs, -N, -Vss)``, který
 
- - rozdělí požadované délky do skupin, které se mají nařezat z jednoho trámu
- - truhlář přitom používá hladový algoritmus, tj. pro každou délku použije první trám, z něhož lze ještě požadovanou délku odřezat
- - vrátí celkový počet řezaných trámů N
- - a seznam seznamů Vss (délky N), jehož každý prvek reprezentuje dělení jednoho trámu (případný zbytek se neuvádí).
+- rozdělí požadované délky do skupin, které se mají nařezat z jednoho trámu
+- truhlář přitom používá hladový algoritmus, tj. pro každou délku použije první
+  trám, z něhož lze ještě požadovanou délku odřezat
+- vrátí celkový počet řezaných trámů N
+- a seznam seznamů Vss (délky N), jehož každý prvek reprezentuje dělení jednoho
+  trámu (případný zbytek se neuvádí).
 
 ```prolog
 ?- rezy(5,[3,2,2,2,2,1,4], N, V).
 N=4, V=[[3,2],[2,2,1],[2],[4]]
 ```
 
-1. Definujte predikát ``rezy/4.`` Definice případných pomocných predikátů prosím opatřete vysvětlujícím komentářem.
-2. Je některý z vašich predikátů koncově rekurzivní? Pokud ano, vysvětlete, který to je a jaký to má význam.
+1. Definujte predikát ``rezy/4.`` Definice případných pomocných predikátů
+   prosím opatřete vysvětlujícím komentářem.
+2. Je některý z vašich predikátů koncově rekurzivní? Pokud ano, vysvětlete,
+   který to je a jaký to má význam.
 3. Pokud ne, dal by se některý takto upravit? Odpověď prosím zdůvodněte.
-    
+
 Řešení:
+
 ```prolog
 second(_-X, X).
 
@@ -302,14 +332,17 @@ greedy_extend_cut(MaxLength, [ Total-Cuts | Cs ], NextCut, Ans) :-
     ),
     !.
 ```
-    
+
 ### Systém různých reprezentantů
 
 Zdroj: [MFF Forum: Zkouška 24. 6. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12078&sid=fe143536d7d0b2e925781a412fafbdc8)
 
-Je zadán seznam množin ``Mss``. Chceme všemi možnými způsoby vybrat a vrátit v seznamu reprezentanty daných množin v odpovídajícím pořadí s podmínkou, že konkrétní reprezentanti v jednom výběru jsou různí.
+Je zadán seznam množin ``Mss``. Chceme všemi možnými způsoby vybrat a vrátit v
+seznamu reprezentanty daných množin v odpovídajícím pořadí s podmínkou, že
+konkrétní reprezentanti v jednom výběru jsou různí.
 
 Příklad:
+
 ```prolog
 ?- reprezentanti([[1],[1,2,3],[1,3,4]], R).
 R = [[1,2,3],[1,2,4],[1,3,4]]
@@ -317,7 +350,11 @@ R = [[1,2,3],[1,2,4],[1,3,4]]
 
 1. Sestavte predikát ``reprezentanti(+Mss, -Rss)``.
 2. Stručně vysvětlete, proč je vaše definice korektní.
-3. Je ve vašem programu použit řez ``(!)`` ? Jde o řez červený (mění deklarativní význam programu) či zelený (nemění d.v.)? Pokud ne, je řez nezbytný pro definici některého vestavěného predikátu / operátoru, který jste ve vašem řešení použili? Jde o řez červený (mění deklarativní význam programu) či zelený (nemění d.v.)?
+3. Je ve vašem programu použit řez ``(!)`` ? Jde o řez červený (mění
+   deklarativní význam programu) či zelený (nemění d.v.)? Pokud ne, je řez
+   nezbytný pro definici některého vestavěného predikátu / operátoru, který
+   jste ve vašem řešení použili? Jde o řez červený (mění deklarativní význam
+   programu) či zelený (nemění d.v.)?
 
 ```prolog
 cons(X, Xs, [X | Xs]).
@@ -342,7 +379,7 @@ reprezentanti([Xs | Xss], Acc, Ans) :-
     reprezentanti(Xss, NewAcc, Ans).
 ```
 
-###  Hammerstein
+### Hammerstein
 
 Zdroj: [MFF Forum: Zkouška 12. 6. 2020 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=12066&sid=fe143536d7d0b2e925781a412fafbdc7)
 
@@ -361,17 +398,25 @@ setrid(Xs,Ys) :-
 
 zapomněl však na klauzuli, která definuje bázi rekurze.
 
-1. Doplňte jednu (opravdu jen jednu) chybějící klauzuli za uvedené pravidlo tak, aby výsledná procedura korektně setřídila vstupní seznam přirozených čísel. Na výstupu bychom měli obdržet jen jediné řešení.
-2.  V definici pravidla je použit řez (!). Jde o zelený (nemění deklarativní význam) či červený řez (mění d.v.) ? Vysvětlete! Obsahuje některá z vašich klauzulí, (doplněná v(a) nebo (b)) zelený či červený řez?
-3. Jaký známý třídící algoritmus výše uvedený kód implementuje? Pokud neznáte název, můžete alespoň slovně popsat, jak setrid/2 funguje.
+1. Doplňte jednu (opravdu jen jednu) chybějící klauzuli za uvedené pravidlo
+   tak, aby výsledná procedura korektně setřídila vstupní seznam přirozených
+   čísel. Na výstupu bychom měli obdržet jen jediné řešení.
+2. V definici pravidla je použit řez (!). Jde o zelený (nemění deklarativní
+   význam) či červený řez (mění d.v.) ? Vysvětlete! Obsahuje některá z vašich
+   klauzulí, (doplněná v(a) nebo (b)) zelený či červený řez?
+3. Jaký známý třídící algoritmus výše uvedený kód implementuje? Pokud neznáte
+   název, můžete alespoň slovně popsat, jak ``setrid/2`` funguje.
 4. *VOLITELNE*: Lze u procedury ``setrid/2`` obrátit směr výpočtu?
+
 ```prolog
 setrid(-Xs,+Ys) :- Xs je seznam přirozených čísel ze seznamu Ys setříděný vzestupně
 ```
 
-Pokud ne, šel by kód jednoduše upravit tak, aby se výsledný predikát (pojmenovaný třeba ``setrid2/2``) dal korektně volat oběma způsoby?
+Pokud ne, šel by kód jednoduše upravit tak, aby se výsledný predikát
+(pojmenovaný třeba ``setrid2/2``) dal korektně volat oběma způsoby?
 
 Řešení:
+
 ```prolog
 % setrid(+Xs,-Ys) :- Ys je seznam přirozených čísel ze seznamu Xs setříděný
 % vzestupně
@@ -389,28 +434,44 @@ setrid(Xs, Xs).
 
 Zdroj: [MFF Forum: Zkouška 12. 6. 2020 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=12066&sid=fe143536d7d0b2e925781a412fafbdc7)
 
-Do země Mobilia, v níž je každý občan vybaven chytrým telefonem, přicestoval Cestovatel, nakažený virovým onemocněním. Všichni ostatní byli přitom ještě zdraví. Můžeme předpokládat, že virus se přenese z jedné osoby na druhou, pokud spolu strávili ve vzdálenosti menší než 2m alespoň čas ``K``, kde ``K`` je známá kritická hodnota. Díky chytrým telefonům máme pro každého občana Mobilie seznam záznamů jeho kontaktů, kde každý takový záznam pro osobu ``A`` obsahuje identifikaci osoby ``B``, která se k němu přiblížila do vzdálenosti ``< 2m`` čas setkání a délku setkání.
+Do země Mobilia, v níž je každý občan vybaven chytrým telefonem, přicestoval
+Cestovatel, nakažený virovým onemocněním. Všichni ostatní byli přitom ještě
+zdraví. Můžeme předpokládat, že virus se přenese z jedné osoby na druhou, pokud
+spolu strávili ve vzdálenosti menší než 2m alespoň čas ``K``, kde ``K`` je
+známá kritická hodnota. Díky chytrým telefonům máme pro každého občana Mobilie
+seznam záznamů jeho kontaktů, kde každý takový záznam pro osobu ``A`` obsahuje
+identifikaci osoby ``B``, která se k němu přiblížila do vzdálenosti ``< 2m``
+čas setkání a délku setkání.
 
-Cílem je sestavit program, který na základě takových záznamů vrátí seznam infikovaných osob.
+Cílem je sestavit program, který na základě takových záznamů vrátí seznam
+infikovaných osob.
 
-1. V jazyce Prolog popište datovou strukturu pro reprezentaci jednoho záznamu kontaktu občana Mobilie popsaného výše.
-2. V jazyce Prolog navrhněte reprezentaci položek VstupníhoSeznamu, přičemž každá položka bude obsahovat indentifikaci občana Mobilie a seznam záznamů jeho kontaktů.
+1. V jazyce Prolog popište datovou strukturu pro reprezentaci jednoho záznamu
+   kontaktu občana Mobilie popsaného výše.
+2. V jazyce Prolog navrhněte reprezentaci položek VstupníhoSeznamu, přičemž
+   každá položka bude obsahovat indentifikaci občana Mobilie a seznam záznamů
+   jeho kontaktů.
 3. Sestavte predikát ``inf/4``, který obdrží
-```
-VstupníSeznam
-identifikaci Cestovatele
-kritickou hodnotu K
-```
-a vrátí seznam infikovaných.
 
-U každého pomocného predikátu prosím v poznámce popište jeho význam.
+    ```none
+    VstupníSeznam
+    identifikaci Cestovatele
+    kritickou hodnotu K
+    ```
 
-*Volitelné:* výstupní seznam můžete uspořádat dle délky kontaktu s infikovanými do nerostoucí posloupnosti.
+    a vrátí seznam infikovaných.
+
+    U každého pomocného predikátu prosím v poznámce popište jeho význam.
+
+    *Volitelné:* výstupní seznam můžete uspořádat dle délky kontaktu s infikovanými
+    do nerostoucí posloupnosti.
 
 4. Odhadněte časovou složitost vašeho řešení.
-5. Je některý z vašich predikátů koncově rekurzivní ? Pokud ano, vysvětlete, jaký to má význam. Pokud ne , dal by se některý takto upravit?
+5. Je některý z vašich predikátů koncově rekurzivní ? Pokud ano, vysvětlete,
+   jaký to má význam. Pokud ne , dal by se některý takto upravit?
 
 Řešení:
+
 ```prolog
 % contact(ID, Time, Length)
 
@@ -454,16 +515,19 @@ inf(ContactsList, K, [ ID-TimeInfected | Ps ], Acc, Ans) :-
     inf(ContactsList, K, NewToProcess, NewAcc, Ans).
 ```
 
-
 ### Generování hodnot výrokových proměnných
 
 Zdroj: [MFF Forum: 10. 9. 2019 - Dvořák](http://forum.matfyz.info/viewtopic.php?f=169&t=11977&sid=fe143536d7d0b2e925781a412fafbdc8)
 
 Definujte binární predikát ``aspon2/2``, který
-- obdrží seznam výrokových proměnných (reprezentovaných atomy), v němž je každá proměnná ohodnocena hodnotou true nebo false
-- vrátí seznam všech takových ohodnocení týchž proměnných, v němž se každé ohodnocení bude od vstupního lišit v hodnotách alespoň 2 proměnných.
+
+- obdrží seznam výrokových proměnných (reprezentovaných atomy), v němž je každá
+  proměnná ohodnocena hodnotou true nebo false
+- vrátí seznam všech takových ohodnocení týchž proměnných, v němž se každé
+  ohodnocení bude od vstupního lišit v hodnotách alespoň 2 proměnných.
 
 Příklad:
+
 ```prolog
 ?- aspon2([x1-true, x2-false, y-true], V).
   V =  [  [x1-false, x2-true, y-true],
@@ -473,6 +537,7 @@ Příklad:
 ```
 
 Řešení:
+
 ```prolog
 cons(X, Xs, [X | Xs]).
 
@@ -506,15 +571,21 @@ subset_change([Var-Value | Values], Ans) :-
 
 Zdroj: [MFF Forum: 10. 9. 2019 - Dvořák](http://forum.matfyz.info/viewtopic.php?f=169&t=11977&sid=fe143536d7d0b2e925781a412fafbdc8)
 
-Graf je zadán jako seznam svých vrcholů se seznamy sousedů (viz příklad). Definujte binární predikát ``troj(+Graf, -SeznamTrojuhelniku)`` který k takovému grafu vrátí seznam všech jeho trojúhelníků. Ve výsledném seznamu by se každý trojúhelník měl vyskytovat právě jednou (``t(a,b,c)``, ``t(b,c,a)`` a ``t(c,a,b)`` jsou stejné trojúhelníky).
+Graf je zadán jako seznam svých vrcholů se seznamy sousedů (viz příklad).
+Definujte binární predikát ``troj(+Graf, -SeznamTrojuhelniku)`` který k
+takovému grafu vrátí seznam všech jeho trojúhelníků. Ve výsledném seznamu by se
+každý trojúhelník měl vyskytovat právě jednou (``t(a,b,c)``, ``t(b,c,a)`` a
+``t(c,a,b)`` jsou stejné trojúhelníky).
 
 Příklad:
+
 ```prolog
 ?- troj([a-[b,c,d],b-[a,c],c-[a,b,d],d-[a,c],e-[]], S).
      S = [t(a,b,c), t(a,c,d)]
 ```
-     
+
 Řešení:
+
 ```prolog
 is_edge(Graph, From, To) :-
     member(From-Neighbours, Graph),
@@ -584,16 +655,23 @@ troj(Graph, Triangles) :-
     deduplicate(Tmp, Triangles).
 ```
 
-
 ### Generování výrokových formulí
 
 Zdroj: [MFF Forum: 24.6.2019 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=11969&sid=fe143536d7d0b2e925781a412fafbdc8)
 
-Formule výrokového počtu jsou sestavené z (výrokových) proměnných ve funktoru ``var/1`` a logických spojek negace, konjunkce a disjunkce (bez konstant). Dále máte dány v argumentech predikátu ``gen/3`` číslo ``k`` pro velikost formule a seznam jmen proměnných. Generujte backtrackingem všechny logické formule (každou jednou), které obsahují proměnné ze seznamu a ve kterých je počet spojek a výskytů proměnných dohromady právě ``k``.
+Formule výrokového počtu jsou sestavené z (výrokových) proměnných ve funktoru
+``var/1`` a logických spojek negace, konjunkce a disjunkce (bez konstant). Dále
+máte dány v argumentech predikátu ``gen/3`` číslo ``k`` pro velikost formule a
+seznam jmen proměnných. Generujte backtrackingem všechny logické formule
+(každou jednou), které obsahují proměnné ze seznamu a ve kterých je počet
+spojek a výskytů proměnných dohromady právě ``k``.
 
-Definujte predikát ``gen(+K, +Jmena, -Fle)``. Na pořadí generovaných formulí nezáleží, ale měli byste vygenerovat každou právě jednou. K řešení není potřeba predikát ``=../2`` (univ).
+Definujte predikát ``gen(+K, +Jmena, -Fle)``. Na pořadí generovaných formulí
+nezáleží, ale měli byste vygenerovat každou právě jednou. K řešení není potřeba
+predikát ``=../2`` (univ).
 
 Příklad:
+
 ```prolog
 ?- gen(4,[p],F).
 
@@ -608,6 +686,7 @@ false.
 ```
 
 Řešení:
+
 ```prolog
 gen(K, Vars, F) :-
     length(Slots, K),
@@ -632,9 +711,16 @@ gen_([_ | Ss], Vars, Ans) :-
 
 Zdroj: [MFF Forum: 24.6.2019 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=11969&sid=fe143536d7d0b2e925781a412fafbdc8)
 
-Jeden objekt je zadán uspořádaným seznamem dvojic klíč-hodnota. Na vstupu máte seznam objektů. Napište proceduru ``koncept/2``, která vyrobí nejmenší koncept zahrnující všechny vstupní objekty. Koncept je seznam dvojic ``klíč-seznam_hodnot``. Koncept zahrnuje objekt, pokud koncept má všechny klíče objektu a v seznamu hodnot příslušného klíče u konceptu je obsažena hodnota klíče u objektu. Pokud objekt nějaký klíč konceptu nemá, bude v seznamu hodnot konceptu hodnota ``nedef``.
+Jeden objekt je zadán uspořádaným seznamem dvojic klíč-hodnota. Na vstupu máte
+seznam objektů. Napište proceduru ``koncept/2``, která vyrobí nejmenší koncept
+zahrnující všechny vstupní objekty. Koncept je seznam dvojic
+``klíč-seznam_hodnot``. Koncept zahrnuje objekt, pokud koncept má všechny klíče
+objektu a v seznamu hodnot příslušného klíče u konceptu je obsažena hodnota
+klíče u objektu. Pokud objekt nějaký klíč konceptu nemá, bude v seznamu hodnot
+konceptu hodnota ``nedef``.
 
 Příklad:
+
 ```prolog
 ?- koncept([ [barva-modra, motor-diesel, pocet_kol-6],
              [barva-bila, motor-plyn, pocet_mist-40],
@@ -647,6 +733,7 @@ Koncept = [ barva-[modra,bila,nedef],
 ```
 
 Řešení:
+
 ```prolog
 collect_attributes(Objects, Attributes) :-
     collect_attributes(Objects, [], Attributes).
@@ -717,15 +804,18 @@ set_add(List, Element, Out) :-
 
 Zdroj: [MFF Forum: Zkouška 10.6.2019 (Dvořák + Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=11954)
 
-Máte dány dva řetězce, u kterých nevíte jejich vzájemnou orientaci. Najděte a vydejte v seznamu všechna jejich vzájemná neprázdná překrytí.
+Máte dány dva řetězce, u kterých nevíte jejich vzájemnou orientaci. Najděte a
+vydejte v seznamu všechna jejich vzájemná neprázdná překrytí.
 
 Příklad:
+
 ```prolog
 ?- prekryti([a,t,c,t,c],[c,t,c,c], V).
 V = [a,t,c,t,c,t,c,c],[a,t,c,t,c,c],[a,t,c,t,c,c,t,c]]
 ```
 
 Řešení:
+
 ```prolog
 id_or_reverse(X, X).
 id_or_reverse(X, Y) :-
@@ -755,21 +845,27 @@ is_prekryti(Xs, Ys, Out) :-
     append(X, TailY, Out).
 ```
 
-
 ### Neporovnatelné prvky částečně uspořádané množiny
 
 Zdroj: [MFF Forum: Zkouška 10.6.2019 (Dvořák + Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=11954)
 
-Částečně uspořádaná množina je popsána seznamem termů tvaru ``x -> y`` s významem x pokrývá y (tj. ``x > y`` a současně ``x ≥ z ≥ y`` implikuje ``x = z`` nebo ``y = z``).
-Definujte predikát ``nepor/2``, který k takto zadané množině vrátí seznam všech dvojic vzájemně neporovnatelných prvků (tj. dvojic ``x``,``y`` takových, že neplatí ``x ≥ y`` ani ``x ≤ y``).
+Částečně uspořádaná množina je popsána seznamem termů tvaru ``x -> y`` s
+významem x pokrývá y (tj. ``x > y`` a současně ``x ≥ z ≥ y`` implikuje ``x =
+z`` nebo ``y = z``).
+
+Definujte predikát ``nepor/2``, který k takto zadané množině vrátí seznam všech
+dvojic vzájemně neporovnatelných prvků (tj. dvojic ``x``,``y`` takových, že
+neplatí ``x ≥ y`` ani ``x ≤ y``).
 
 Příklad:
+
 ```prolog
 ?- nepor([a->b, a->c, b->d, e->f], N).
 N = [a-e,a-f,b-c,b-e,b-f,c-d,c-e,c-f,d-e,d-f]
 ```
 
 Řešení:
+
 ```prolog
 ge(_, X, X).
 ge(R, X, Y) :- member(X -> Y, R).
@@ -811,9 +907,10 @@ Zdroj: [MFF Forum: Zkouška 21.6.2018](http://forum.matfyz.info/viewtopic.php?f=
 Nalezněte lexikograficky předchozí permutaci. Pokud neexistuje tak ``false``.
 
 Řešení:
+
 ```prolog
 ?- prev([1,2,6,3,4,5,7],V).
-V = [1,2,5,7,6,4,3] 
+V = [1,2,5,7,6,4,3]
 ```
 
 ```prolog
@@ -844,7 +941,7 @@ prev(Perm, Prev) :-
     append(NewAsc, FinalRest, Prev).
 
 ```
-  
+
 ### Frekvence
 
 Zdroj: [MFF Forum: Zkouška 26.6.2018](http://forum.matfyz.info/viewtopic.php?f=169&t=11756)
@@ -853,12 +950,13 @@ Definujte predikát ``frekv/2``, který obdrží seznam konstant
 a vrátí frekvence dvojic za sebou jdoucích konstant.
 Výstupní reprezentaci si zvolte a popište pro vzorový vstup.
 
-```
+```prolog
 ?- frekv([a,b,a,b,c], P).
 P = [f(a-b,2), f(b-a,1), f(b-c,1)]
 ```
 
 Řešení:
+
 ```prolog
 frekv(List, Freq) :-
     frekv_(List, [], Freq),
@@ -882,17 +980,23 @@ increase_frequency(X-Y, Freq, [f(X-Y, 1) | Freq]).
 
 Zdroj: [MFF Forum: Zkouška 26.6.2018](http://forum.matfyz.info/viewtopic.php?f=169&t=11756)
 
-Je dán orientovaný acyklický graf (DAG) o ``n`` vrcholech pomocí seznamu sousedů. Procedura ``dfs/2`` projde graf do hloubky a přidá k vrcholům časy otevření a uzavření v rozsahu od ``1`` do ``2n``. Na pořadí vrcholů na výstupu nezáleží:
+Je dán orientovaný acyklický graf (DAG) o ``n`` vrcholech pomocí seznamu
+sousedů. Procedura ``dfs/2`` projde graf do hloubky a přidá k vrcholům časy
+otevření a uzavření v rozsahu od ``1`` do ``2n``. Na pořadí vrcholů na výstupu
+nezáleží:
 
-Definujte predikát ``dfs/2`` a napište konkrétní výstup vašeho programu na vzorovém grafu z příkladu níže.
+Definujte predikát ``dfs/2`` a napište konkrétní výstup vašeho programu na
+vzorovém grafu z příkladu níže.
 
 Příklad:
+
 ```prolog
 ?- dfs([c-[d], a-[b,c], b-[d,e], d-[], e-[]], V).
 V = [v(a,1,10,[b,c]), v(c,2,5,[d]), v(d,3,4,[]), v(b,6,9,[e]), v(e,7,8,[])]
 ```
 
 Řešení:
+
 ```prolog
 dfs(Graph, Out) :-
     member(Start-_, Graph),
@@ -916,7 +1020,7 @@ dfs_(Graph, [ Vertex | Vs ], Time, Opened, Closed, Out) :-
             Graph,
             Vs,
             NewTime,
-            NewOpened, 
+            NewOpened,
             [t(Vertex, InTime, Time) | Closed],
             Out
         )
@@ -939,7 +1043,10 @@ dfs_(Graph, [ Vertex | Vs ], Time, Opened, Closed, Out) :-
 
 Zdroj: [MFF Forum: Zkouška 6. 6. 2016 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=10961)
 
-Naprogramujte predikát ``splay(+Hodnota, +BinarniVyhledavaciStrom, -Vysledek)``, který provede funkci ``splay`` (přesune daný vrchol až do kořene pomoci rotací) na ``Hodnotu``. Pokud ``Hodnota`` ve stromě není, pak se splay provede na bezprostredního předchůdce/následníka.
+Naprogramujte predikát ``splay(+Hodnota, +BinarniVyhledavaciStrom,
+-Vysledek)``, který provede funkci ``splay`` (přesune daný vrchol až do kořene
+pomoci rotací) na ``Hodnotu``. Pokud ``Hodnota`` ve stromě není, pak se splay
+provede na bezprostredního předchůdce/následníka.
 
 ```prolog
 TestTree = tree(
@@ -962,8 +1069,9 @@ TestTree = tree(
 ```
 
 Řešení:
+
 ```prolog
-splay(X, T, T) :- 
+splay(X, T, T) :-
     T = tree(_, X, _),
     !.
 splay(X, T, Out) :-
@@ -983,15 +1091,20 @@ splay(X, T, Out) :-
 splay(_, T, T) :- T = tree(null, _, null).
 ```
 
-### Skládání konstantních úseků 
+### Skládání konstantních úseků
 
 Zdroj: [MFF Forum: Zkouška 6. 6. 2016 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=10961)
 
-Na vstupu máme seznam po částech konstantních funkcí ``Fs``, kde každá funkce je ve tvaru ``DelkaUseku-Hodnota``. Všechny funkce začinají v ``0`` a po konci posledního useku pokračují hodnotou ``0``. Máme vytvořit nejmenší novou funkci takovu, že v každém bodě je větší rovna všem zadaným funkcím.
+Na vstupu máme seznam po částech konstantních funkcí ``Fs``, kde každá funkce
+je ve tvaru ``DelkaUseku-Hodnota``. Všechny funkce začinají v ``0`` a po konci
+posledního useku pokračují hodnotou ``0``. Máme vytvořit nejmenší novou funkci
+takovu, že v každém bodě je větší rovna všem zadaným funkcím.
 
 Příklad:
 
-Dvě funkce: první má na intervalu ``[0, 2)`` hodnotu 5, na intervalu ``[2, 4)`` hodnotu 3 a na intervalu ``[4, inf)`` hodnotu 0. Druhá má na intervalu ``[0, 3)`` hodnotu 4 a na intervalu ``[3, inf)`` hodnotu 0.
+Dvě funkce: první má na intervalu ``[0, 2)`` hodnotu 5, na intervalu ``[2, 4)``
+hodnotu 3 a na intervalu ``[4, inf)`` hodnotu 0. Druhá má na intervalu ``[0,
+3)`` hodnotu 4 a na intervalu ``[3, inf)`` hodnotu 0.
 Vysledkem je funkce ``[2-5, 1-4, 1-3]``.
 
 ```prolog
@@ -1000,6 +1113,7 @@ G = [2-5, 1-4, 1-3]
 ```
 
 Řešení:
+
 ```prolog
 combine([], []).
 combine([ Base | Fs ], G) :-
@@ -1056,15 +1170,20 @@ merge_adjecent([X, Y | LVs], [X | Out]) :-
 
 Zdroj: [MFF Forum: Zkouška 22.6.](http://forum.matfyz.info/viewtopic.php?f=169&t=11412)
 
-Máme daný orientovaný graf reprezentovaný jako ``[vrchol-[seznam sousedů]|...]``, zjistěte, zda v něm je orientovaná kružnice, a pokud ano, vraťte vrcholy nějaké takové kružnice v tom pořadí, jak jsou na kružnici. Chce se polynomiální řešení.
+Máme daný orientovaný graf reprezentovaný jako ``[vrchol-[seznam
+sousedů]|...]``, zjistěte, zda v něm je orientovaná kružnice, a pokud ano,
+vraťte vrcholy nějaké takové kružnice v tom pořadí, jak jsou na kružnici. Chce
+se polynomiální řešení.
 
 Příklad:
+
 ```prolog
 ?- cycle([a-[b,c,d],b-[c],c-[a,b,d],d-[a,c],e-[]], C)
 C = [a, c, b]
 ```
 
 Řešení:
+
 ```prolog
 cycle(Graph, Cycle) :-
     member(Start-_, Graph),
@@ -1090,15 +1209,19 @@ cycle_(Graph, [ Vertex | Vs ], Path, Out) :-
 
 Zdroj: [MFF Forum: Zkouska 20.9.2017](http://forum.matfyz.info/viewtopic.php?f=169&t=11466)
 
-Definujte predikát ``dif/2``, který obdrží seznam ``S``, a vrátí seznam všech seznamů, které obdržíte z ``S`` vypuštěním nejvýše 2 prvků. Pořadí prvků ve výstupních seznamech se nemění.
+Definujte predikát ``dif/2``, který obdrží seznam ``S``, a vrátí seznam všech
+seznamů, které obdržíte z ``S`` vypuštěním nejvýše 2 prvků. Pořadí prvků ve
+výstupních seznamech se nemění.
 
 Příklad:
+
 ```prolog
 ?- dif([a,b,c],D).
 D=[[a,b,c], [b,c], [a,c], [a,b], [a], [c]]
 ```
 
 Řešení:
+
 ```prolog
 smaller_than(N, Xs) :- length(Xs, K), K < N.
 
@@ -1121,9 +1244,12 @@ dif_([X | Xs], Out) :-
 
 Zdroj: [MFF Forum: Zkouska 20.9.2017](http://forum.matfyz.info/viewtopic.php?f=169&t=11466)
 
-Je zadán neorientovaný graf ``G`` a jeden jeho vrchol ``v``. Definujte predikát ``pokryti/3,`` který postupně vrátí všechna vrcholová pokrytí grafu ``G``, která obsahují vrchol ``v`` a jsou minimální vzhledem k inkluzi.
+Je zadán neorientovaný graf ``G`` a jeden jeho vrchol ``v``. Definujte predikát
+``pokryti/3,`` který postupně vrátí všechna vrcholová pokrytí grafu ``G``,
+která obsahují vrchol ``v`` a jsou minimální vzhledem k inkluzi.
 
-Množina vrcholů ``V`` grafu je vrcholovým pokrytím, pokud každá hrana má alespoň jeden vrchol v množině ``V``.
+Množina vrcholů ``V`` grafu je vrcholovým pokrytím, pokud každá hrana má
+alespoň jeden vrchol v množině ``V``.
 
 1. Na příkladě popište, jakou reprezentaci grafu budete používat.
 2. Definujte predikát
@@ -1131,6 +1257,7 @@ Množina vrcholů ``V`` grafu je vrcholovým pokrytím, pokud každá hrana má 
 kde Graf je zadán v reprezentaci popsané v **1.)**.
 
 Řešení:
+
 ```prolog
 collect_nodes(Graph, Nodes) :-
     collect_nodes(Graph, [], NodesDup),
@@ -1176,9 +1303,12 @@ pokryti_(Graph, Vertex, Nodes, Cover) :-
 
 Zdroj: [MFF Forum: Zkouška 13. 9. 2017](http://forum.matfyz.info/viewtopic.php?f=169&t=11457)
 
-Napište predikát ``rozdel(+Mnozina,-Rozdeleni)``, který rozdělí množinu na neprázdné podmnožiny. Všechny možnosti rozdělení pak vrátí spojené v jednom seznamu.
+Napište predikát ``rozdel(+Mnozina,-Rozdeleni)``, který rozdělí množinu na
+neprázdné podmnožiny. Všechny možnosti rozdělení pak vrátí spojené v jednom
+seznamu.
 
 Příklad:
+
 ```prolog
 ?- rozdel([a,b,c],X).
 X = [[a, b, c], [[a, b], [c]], [[a], [b, c]], [[a, c], [b]], [[a], [b], [c]]].
@@ -1190,9 +1320,12 @@ X = [[a, b, c], [[a, b], [c]], [[a], [b, c]], [[a, c], [b]], [[a], [b], [c]]].
 
 Zdroj: [MFF Forum: Zkouška 13. 9. 2017](http://forum.matfyz.info/viewtopic.php?f=169&t=11457)
 
-Napište predikát ``nez(+Graf,+Vrchol.-NezMn)``, který vezme graf a jeden jeho zadaný vrchol a postupně vydává všechny jeho největší nezávislé množiny obsahující daný vrchol.
+Napište predikát ``nez(+Graf,+Vrchol.-NezMn)``, který vezme graf a jeden jeho
+zadaný vrchol a postupně vydává všechny jeho největší nezávislé množiny
+obsahující daný vrchol.
 
 Příklad:
+
 ```prolog
 nez(g([a,b,c,d,e],[a-b,b-c,b-d,c-d]),a,X).
 X=[a,c,e];
@@ -1200,6 +1333,7 @@ X=[a,d,e].
 ```
 
 Řešení:
+
 ```prolog
 is_edge(g(_, Edges), U, V) :-
     member(U-V, Edges), !;
@@ -1243,14 +1377,19 @@ nez_(Graph, N, IndSet) :-
 Zdroj: [MFF Forum: Zkouška 6. 6. 2017](http://forum.matfyz.info/viewtopic.php?f=169&t=11380)
 
 Na vstupu máme graf reprezentovaný jako
+
 ```prolog
 graf(SeznamVrcholu, SeznamHran)
 ```
-(bylo ale dovoleno si reprezentaci grafu změnit) a číslo ``N``. Máme určit, jestli v grafu existuje cyklus délky alespoň ``N``. Pokud ano, program alespoň jeden takový cyklus vypíše, pokud ne, vrátí fail.
+
+(bylo ale dovoleno si reprezentaci grafu změnit) a číslo ``N``. Máme určit,
+jestli v grafu existuje cyklus délky alespoň ``N``. Pokud ano, program alespoň
+jeden takový cyklus vypíše, pokud ne, vrátí fail.
 
 *Pozn.: Problém je NP-úplný, tzn. očekává se řešení typu hrubá síla.*
 
 Řešení:
+
 ```prolog
 subsets([], []).
 subsets([ H | T ], [ H | Out ]) :-
@@ -1291,9 +1430,13 @@ cycle_n(Graph, N, Cycle) :-
 
 Zdroj: [MFF Forum: Zkouška 29.5.2017](http://forum.matfyz.info/viewtopic.php?f=169&t=11357)
 
-Sestavte predikát ``termy/1``, který postupně vrací termy složené z funktorů ``bin/2``, ``un/1`` a ``const/0``. Výstupem bude tedy korektně sestavený term. Predikát by měl postupně vrátit všechna řešení, sice v libovolném pořadí, ovšem každé právě jednou.
+Sestavte predikát ``termy/1``, který postupně vrací termy složené z funktorů
+``bin/2``, ``un/1`` a ``const/0``. Výstupem bude tedy korektně sestavený term.
+Predikát by měl postupně vrátit všechna řešení, sice v libovolném pořadí, ovšem
+každé právě jednou.
 
 Příklad:
+
 ```prolog
 ?- termy(V).
 V=const;
@@ -1305,6 +1448,7 @@ V=bin(un(const),un(const));
 ```
 
 Řešení:
+
 ```prolog
 termy(V) :-
     length(Slots, _),
@@ -1323,9 +1467,12 @@ termy_([_ | Slots], bin(T1, T2)) :-
 
 Zdroj: [MFF Forum: Zkouška 29.5.2017](http://forum.matfyz.info/viewtopic.php?f=169&t=11357)
 
-Multimnožinu lze specifikovat seznamem termů ``Prvek-Pocet``. Sestavte predikát ``mensi/2``, který porovná multimnožiny ``A`` a ``B`` následovně:
+Multimnožinu lze specifikovat seznamem termů ``Prvek-Pocet``. Sestavte predikát
+``mensi/2``, který porovná multimnožiny ``A`` a ``B`` následovně:
 
- - ``mensi(A,B)`` je ``true`` právě tehdy, pokud v ``B`` existuje nějaký prvek, co není v ``A`` takový, že je větší než všechny prvky z ``A``, které nejsou v ``B``.
+- ``mensi(A,B)`` je ``true`` právě tehdy, pokud v ``B`` existuje nějaký prvek,
+  co není v ``A`` takový, že je větší než všechny prvky z ``A``, které nejsou
+  v ``B``.
 
 ```prolog
 ?- mensi([c-3,b-2,a-1],[d-1,b-3])
@@ -1341,9 +1488,18 @@ fail
 
 Zdroj: [MFF Forum: Zkouška 13. 6. 2016 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=10963)
 
-Napište predikát, který naplánuje pokud možno optimální (nutné použít nějakou jednoduchou heuristiku) rozvrh výroby na strojích. Na vstupu je seznam délek operací (např. ``[3,3,2,6,4]``) a maximální čas běhu (např. ``10``). Operace je možné plánovat na paralelně běžící stroje, chceme, aby celkový počet potřebných strojů byl co nejmenší. Výstupem má být nějaké optimální rozložení operací pro jednotlivé stroje (např. ``[[3,3,2],[6,4]]``, což znamená, že použijeme dva stroje, první z nich vykoná operace trvající ``3``, ``3`` a ``2 ``úseky, druhý operace trvající ``6`` a ``4`` časové úseky, obojí se vejde do limitu ``10`` časových úseků / stroj).
+Napište predikát, který naplánuje pokud možno optimální (nutné použít nějakou
+jednoduchou heuristiku) rozvrh výroby na strojích. Na vstupu je seznam délek
+operací (např. ``[3,3,2,6,4]``) a maximální čas běhu (např. ``10``). Operace je
+možné plánovat na paralelně běžící stroje, chceme, aby celkový počet potřebných
+strojů byl co nejmenší. Výstupem má být nějaké optimální rozložení operací pro
+jednotlivé stroje (např. ``[[3,3,2],[6,4]]``, což znamená, že použijeme dva
+stroje, první z nich vykoná operace trvající ``3``, ``3`` a ``2`` úseky, druhý
+operace trvající ``6`` a ``4`` časové úseky, obojí se vejde do limitu ``10``
+časových úseků / stroj).
 
 Řešení:
+
 ```prolog
 sum(List, Sum) :-
     sum_(List, 0, Sum).
@@ -1381,9 +1537,11 @@ extend_plan([ P | Ps ], MaxTime, T, Out) :-
 
 Zdroj: [MFF Forum: Zkouška 13. 6. 2016 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=10963)
 
-Máte zadaný binární strom (klasická ``tree(vlevo, hodnota, vpravo)`` notace). Roztřiďte vrcholy podle toho, kolikrát musíme jít doprava, než je objevíme.
+Máte zadaný binární strom (klasická ``tree(vlevo, hodnota, vpravo)`` notace).
+Roztřiďte vrcholy podle toho, kolikrát musíme jít doprava, než je objevíme.
 
 Řešení:
+
 ```prolog
 group_by_right_turns(null, []).
 group_by_right_turns(tree(Left, Val, Right), Out) :-
@@ -1403,15 +1561,21 @@ merge_([X | Xs], [ Y | Ys], [ Z | Ans ]) :-
 
 Zdroj: [MFF Forum: Zkouška 28.6.2016 - Dvořák, Hric](http://forum.matfyz.info/viewtopic.php?f=169&t=10993)
 
-Napište predikát ``parovani(+G, +H, -P)``, který bere neorientovaný graf ``G`` bez smyček (tj. reflexivních hran) zadaný jako seznam následníků, hranu ``H`` v podobě ``(v1-v2)`` a vydá co do inkluze maximální párování obsahující zadanou hranu ``H`` (pozor: nikoli největší párování, ale pouze maximální co do inkluze).
+Napište predikát ``parovani(+G, +H, -P)``, který bere neorientovaný graf ``G``
+bez smyček (tj. reflexivních hran) zadaný jako seznam následníků, hranu ``H`` v
+podobě ``(v1-v2)`` a vydá co do inkluze maximální párování obsahující zadanou
+hranu ``H`` (pozor: nikoli největší párování, ale pouze maximální co do
+inkluze).
 
 Například:
+
 ```prolog
 ?- parovani([a-[b,c,d],b-[a,c],c-[a,b,d],d-[a,c],e-[]],a-d,P)
 P = [a-d,b-c].
 ```
 
 Řešení:
+
 ```prolog
 parovani(Graph, Edge, MaxMatching) :-
     Edge = U-V,
@@ -1435,9 +1599,14 @@ parovani_(_, _, []).
 
 Zdroj: [MFF Forum: Zkouška 30. 05. 2016 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=10934)
 
-Na vstupu dostaneme posloupnost čísel a číslo ``V``. Máme vrátit všechny možné matematické výrazy, které lze z dané posloupnosti postavit pomocí operátorů ``+``, ``-``, ``*``, ``//`` a ``závorek``, a jejichž hodnota je ``V``. Výraz musí využít všechna zadaná čísla, a jejich pořadí nesmí měnit. Dále si máme dávat pozor, abychom ve výrazu nedělili nulou.
+Na vstupu dostaneme posloupnost čísel a číslo ``V``. Máme vrátit všechny možné
+matematické výrazy, které lze z dané posloupnosti postavit pomocí operátorů
+``+``, ``-``, ``*``, ``//`` a ``závorek``, a jejichž hodnota je ``V``. Výraz
+musí využít všechna zadaná čísla, a jejich pořadí nesmí měnit. Dále si máme
+dávat pozor, abychom ve výrazu nedělili nulou.
 
 Řešení:
+
 ```prolog
 gen_expr(List, V, Expr) :-
     gen_expr_(List, Expr),
@@ -1464,21 +1633,29 @@ gen_expr_(Xs, Expr) :-
 
 Zdroj: [MFF Forum: Zkouška 19.06.2015 - Dvořák, Hric](http://forum.matfyz.info/viewtopic.php?f=169&t=10536)
 
-Napište predikát ``zlepsirez(+Graf, +Vrcholy1, +Vrcholy2, -OutV)``, který pro zadaný ohodnocený neorientovaný graf ``Graf`` a řez (definovaný pomocí dvou disjunktních množin vrcholů ``Vrcholy1`` a ``Vrcholy2``) najde vrchol, který když přesuneme do opačné skupiny vrcholů řezu, tak dostaneme řez s lepší cenou. 
+Napište predikát ``zlepsirez(+Graf, +Vrcholy1, +Vrcholy2, -OutV)``, který pro
+zadaný ohodnocený neorientovaný graf ``Graf`` a řez (definovaný pomocí dvou
+disjunktních množin vrcholů ``Vrcholy1`` a ``Vrcholy2``) najde vrchol, který
+když přesuneme do opačné skupiny vrcholů řezu, tak dostaneme řez s lepší cenou.
 
 ### Ohodnocení stromu post- a pre-order
 
 Zdroj: [MFF Forum: Zkouška 2. 6. 2015 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=10479)
 
-Definujte predikát ``transverse(+Strom,-OhodnocenýStrom)``, který zkopíruje strukturu stromu ``Strom`` do ``OhodnocenýStrom`` s tím, že ke každému vrcholu přidá číslo ``N``, které znamená pořadí v preOrder průchodu a číslo ``M``, které znamená pořadí v postOrder průchodu. Ideálně jedním průchodem stromem.
+Definujte predikát ``transverse(+Strom,-OhodnocenýStrom)``, který zkopíruje
+strukturu stromu ``Strom`` do ``OhodnocenýStrom`` s tím, že ke každému vrcholu
+přidá číslo ``N``, které znamená pořadí v preOrder průchodu a číslo ``M``,
+které znamená pořadí v postOrder průchodu. Ideálně jedním průchodem stromem.
 
 Příklad
+
 ```prolog
 ?- transverse(t(t(nil,l,nil),v,t(nil,p,nil)),X).
 X = t(t(nil,l-2-1,nil),v-1-3,t(nil,p-3-2,nil))
 ```
 
 Řešení:
+
 ```prolog
 transverse(Tree, Out) :-
     transverse(Tree, 0, 0, _, _, Out),
@@ -1514,7 +1691,8 @@ transverse(Tree, PreOrderIn, PostOrderIn, PreOrderOut, PostOrderOut, Out) :-
 
 Zdroj: [MFF Forum: Zkouška 25. 5. 2014 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=10462)
 
-- napište predikát ``rotace/2`` na rotování seznamu. Nesmíte použít žádné pomocné predikáty. (V lineárním čase) (pouze 3 verze)
+- napište predikát ``rotace/2`` na rotování seznamu. Nesmíte použít žádné
+  pomocné predikáty. (V lineárním čase) (pouze 3 verze)
 - v konstantním čase, jakou potřebujete strukturu? Ukažte na ``[1,2,3]``
 - napište ``rotace/2`` (pouze 2 verze) v konstantním čase
 
@@ -1522,16 +1700,29 @@ Zdroj: [MFF Forum: Zkouška 25. 5. 2014 (Dvořák, Hric)](http://forum.matfyz.in
 
 Zdroj: [MFF Forum: Zkouška 12.7.2021](http://forum.matfyz.info/viewtopic.php?f=169&t=12193)
 
-Jsou zadány dva binární (zakořeněné) stromy ``S`` a ``T`` s ohodnocenými vrcholy, přičemž ohodnocení vrcholů se může opakovat. Definujte predikát ``iso/3``, který zjistí, zdali jsou tyto stromy isomorfní a vydá popis transformace. Volání je ``iso(+S,+T, -Popis)``, kde ve třetím argumentu bude popis. Popis je strom stejného tvaru jako ``S`` a ve vrcholech má boolovské hodnoty ``true`` a ``false``. Hodnota ``true`` ve vrcholu znamená, že se děti vrcholu v ``S`` mají přehodit, abychom dostali ``T``.
+Jsou zadány dva binární (zakořeněné) stromy ``S`` a ``T`` s ohodnocenými
+vrcholy, přičemž ohodnocení vrcholů se může opakovat. Definujte predikát
+``iso/3``, který zjistí, zdali jsou tyto stromy isomorfní a vydá popis
+transformace. Volání je ``iso(+S,+T, -Popis)``, kde ve třetím argumentu bude
+popis. Popis je strom stejného tvaru jako ``S`` a ve vrcholech má boolovské
+hodnoty ``true`` a ``false``. Hodnota ``true`` ve vrcholu znamená, že se děti
+vrcholu v ``S`` mají přehodit, abychom dostali ``T``.
 
-Dva binární stromy jsou isomofní, pokud lze jeden získat z druhého permutací dětí libovolných vrcholů stromu, tj. vyměněním nebo nevyměněním podstromů vrcholu.
+Dva binární stromy jsou isomofní, pokud lze jeden získat z druhého permutací
+dětí libovolných vrcholů stromu, tj. vyměněním nebo nevyměněním podstromů
+vrcholu.
 
-1. Navrhněte reprezentaci binárního (zakořeněného) stromu s ohodnocenými vrcholy v jazyce Prolog. Vaši reprezentaci ukažte na příkladě.
+1. Navrhněte reprezentaci binárního (zakořeněného) stromu s ohodnocenými
+   vrcholy v jazyce Prolog. Vaši reprezentaci ukažte na příkladě.
 2. Definujte predikát ``iso/3``.
-3. Je některý z predikátů, které ve vašem řešení používáte (ať už vámi definovaných či knihovních), nedeterministický? Je predikát ``iso/3`` nedeterministický? Lze ho zdeterminičtit (a jak?), pokud nám stačí nejvýš jedno řešení?
+3. Je některý z predikátů, které ve vašem řešení používáte (ať už vámi
+   definovaných či knihovních), nedeterministický? Je predikát ``iso/3``
+   nedeterministický? Lze ho zdeterminičtit (a jak?), pokud nám stačí nejvýš
+   jedno řešení?
 
 Příklad:
-```
+
+```none
   S= d                 T= d                Popis= t
    /---\                /---\                   /---\
   b     e              e     b                 f     t
@@ -1570,6 +1761,7 @@ T = t(
 ```
 
 Řešení:
+
 ```prolog
 iso(TreeA, TreeB, Transform) :-
     transform(TreeA, Transform, TreeB),
@@ -1588,24 +1780,34 @@ transform(t(Left, Val, Right), t(TransLeft, Bool, TransRight), TreeOut) :-
 
 ### FirstFit
 
-Dostanete informaci o obsazené paměti jako seznam dvojic ``zacatek-konec`` o jednotlivých obsazených úsecích. Úseky jsou v seznamu uspořádány vzestupné a nenavazují bezprostředně na sebe (tj. navazující úseky se spojí) a tyto invarianty chcete udržovat.
+Dostanete informaci o obsazené paměti jako seznam dvojic ``zacatek-konec`` o
+jednotlivých obsazených úsecích. Úseky jsou v seznamu uspořádány vzestupné a
+nenavazují bezprostředně na sebe (tj. navazující úseky se spojí) a tyto
+invarianty chcete udržovat.
 
 Dále dostanete seznam délek úseků, které máte naalokovat.
 
-Napište predikát 
+Napište predikát
+
 ```prolog
 firstFit(+Aalokovat, +Obsazeno, -Umisteni, -ObsszenoO)
 ```
-,který naalokuje postupně všechny požadavky z ``Alokovat`` metodou firstFit, tj. alokuje na první místo, kde se úsek vejde a tím ho obsadí. Vydejte nový popis obsazených úseků, ve tvaru splňujicím invariant, a popis umístění jako seznam dvojic ``delkaUseku-umisteni`` ve stejném pořadíjako v ``Alokova``.
+
+, který naalokuje postupně všechny požadavky z ``Alokovat`` metodou firstFit,
+tj. alokuje na první místo, kde se úsek vejde a tím ho obsadí. Vydejte nový
+popis obsazených úseků, ve tvaru splňujicím invariant, a popis umístění jako
+seznam dvojic ``delkaUseku-umisteni`` ve stejném pořadíjako v ``Alokova``.
 
 Příklad:
+
 ```prolog
 ?- firstFit([100,117,501, 10-50, 1P0-150, 250-1001, U, O).
 U = [100-150,10-50,50-100],
-O = [0-60, 100-150] 
+O = [0-60, 100-150]
 ```
 
 Řešení:
+
 ```prolog
 first_fit([], Obsazeno, [], Obsazeno).
 first_fit([H | T], Obsazeno, [ H-U | UmistnenoAns], ObsazenoOut) :-
@@ -1630,7 +1832,7 @@ first_fit_one(Size, [From-To | Rest], LastFrom-LastTo, LastTo, ObsazenoOut) :-
     ).
 first_fit_one(Size, [From-To | Rest], LastFrom-LastTo, OutPos, ObsazenoOut) :-
     Free is From - LastTo,
-    Free < Size, 
+    Free < Size,
 
     first_fit_one(Size, Rest, From-To, OutPos, ObsazenoAns),
 
@@ -1646,15 +1848,20 @@ first_fit_one(Size, [From-To | Rest], LastFrom-LastTo, OutPos, ObsazenoOut) :-
 
 ### Otočení v sekvenci
 
-Na vstupu je daný seznam ``S`` nějakých položek, například RNA bází. Chcete vydat seznam seznamú položek ``Vs`` jako seznam výsledků, který vznikne otočením nějaké souvislé části ``S`` délky aspoň ``2`` všemi možnými zpüsoby. Napište predikát ``otoceni(+S, -Vs)``.
+Na vstupu je daný seznam ``S`` nějakých položek, například RNA bází. Chcete
+vydat seznam seznamú položek ``Vs`` jako seznam výsledků, který vznikne
+otočením nějaké souvislé části ``S`` délky aspoň ``2`` všemi možnými zpüsoby.
+Napište predikát ``otoceni(+S, -Vs)``.
 
 Přiklad:
+
 ```Prolog
 ?- otoceni([ a, c, g, t], Vs).
 Vs = [[c, a, g, t], [g, c, a, t], [t, g, c, a], [a, t, g, c], [a, c, t, g]]
 ```
 
 Řešení:
+
 ```prolog
 je_otoceni(List, Out) :-
     append(Front, MidBack, List),
@@ -1686,24 +1893,32 @@ otoceni_(_, Acc, Acc) :- !.
 
 Zdroj: [MFF Forum: Zkoužka 4.9.2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12095&sid=fe143536d7d0b2e925781a412fafbdc8)
 
-1. Pro zadanou posloupnost čísel najděte spojitý úsek, jehož součet je největší. Vydejte souřadnice začátku a konce úseku a dosažený součet.
+1. Pro zadanou posloupnost čísel najděte spojitý úsek, jehož součet je
+   největší. Vydejte souřadnice začátku a konce úseku a dosažený součet.
 
-```haskell
-soucty :: Num a => [a] → (Int, Int, a)
-```
-Pokuste se o nějakou optimalizaci, tj. nepočítejte součty hrubou silou (zcela samostatně).
+    ```haskell
+    soucty :: Num a => [a] → (Int, Int, a)
+    ```
 
-Příklad: (indexováno od 0)
-```haskell
-> soucty [-1,1,2,3,-4]
- (1,3,6)
-```
+    Pokuste se o nějakou optimalizaci, tj. nepočítejte součty hrubou silou (zcela
+    samostatně).
 
-2. Jaký význam má část ``Num a =>`` v definici funkce soucty ? Proč tam musí být?
+    Příklad: (indexováno od 0)
+
+    ```haskell
+    > soucty [-1,1,2,3,-4]
+     (1,3,6)
+    ```
+
+2. Jaký význam má část ``Num a =>`` v definici funkce soucty ? Proč tam musí
+   být?
 3. Uveďte dvě možné konkrétní hodnoty proměnné a z typu funkce soucty.
-4. Lze definovat ``Num a``taky pro uživatelské typy nebo musíme použít pouze předdefinované/vestavěné? Lze naši funkci soucty použít pro nějaký uživatelský typ na místě ``a`` ? (Proč ano/ne?) 
+4. Lze definovat ``Num a``taky pro uživatelské typy nebo musíme použít pouze
+   předdefinované/vestavěné? Lze naši funkci soucty použít pro nějaký
+   uživatelský typ na místě ``a`` ? (Proč ano/ne?)
 
 Řešení:
+
 ```haskell
 scan :: (b -> a -> b) -> b -> [a] -> [b]
 scan _ acc []       = [acc]
@@ -1729,8 +1944,8 @@ soucty xs = foldr
 
 Zdroj: [MFF Forum: Zkoužka 4.9.2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12095&sid=fe143536d7d0b2e925781a412fafbdc8)
 
-
-Binární vyhledávací strom je zadán jako seznam hodnot vrcholů v pořadí preorder. Definujte funkci
+Binární vyhledávací strom je zadán jako seznam hodnot vrcholů v pořadí
+preorder. Definujte funkci
 
 ```haskell
 readBt :: Ord a => [a] -> Bt a
@@ -1743,19 +1958,27 @@ data Bt a = Void
           | Node (Bt a) a (Bt a)
 ```
 
-Připomeňme, že v binárním vyhledávacím stromu platí pro každý vrchol ``v``, že všechny hodnoty v levém, resp. pravém podstromu v jsou menší, resp. větší nežli hodnota ``v``. Odtud plyne, že původní strom je zadaným seznamem určen jednoznačně.
+Připomeňme, že v binárním vyhledávacím stromu platí pro každý vrchol ``v``, že
+všechny hodnoty v levém, resp. pravém podstromu v jsou menší, resp. větší nežli
+hodnota ``v``. Odtud plyne, že původní strom je zadaným seznamem určen
+jednoznačně.
 
 Příklad:
+
 ```haskell
 > readBt [5, 2, 4, 9]
 Node (Node Void 2 (Node Void 4 Void)) 5 (Node Void 9 Void)
 ```
 
 1. Definujte funkci ``readBt``.
-2. Je ve vašem řešení použita nějaká funkce vyššího řádu (funkce s funkcionálními argumenty)? Pokud ne, dala by se zde nějaká smysluplně použít?
-3. Je ve vašem řešení použita notace stručných seznamů (list comprehension), tj. ``[... | ...]`` ? Pokud ne, dala by se zde smysluplně použít?
+2. Je ve vašem řešení použita nějaká funkce vyššího řádu (funkce s
+   funkcionálními argumenty)? Pokud ne, dala by se zde nějaká smysluplně
+   použít?
+3. Je ve vašem řešení použita notace stručných seznamů (list comprehension),
+   tj. ``[... | ...]`` ? Pokud ne, dala by se zde smysluplně použít?
 
 Řešení:
+
 ```haskell
 data Bt a = Void
           | Node (Bt a) a (Bt a)
@@ -1775,12 +1998,14 @@ readBt (x : xs) = Node leftAns x rightAns
 
 Zdroj: [MFF Forum: Zkouška 16. 7. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12089&sid=fe143536d7d0b2e925781a412fafbdc8)
 
-Cílem je definovat funkci ``ascending,`` která na vstupu obdrží seznam hodnot (libovolného typu) a vrátí zpět seznam posloupností, který splňuje:
+Cílem je definovat funkci ``ascending,`` která na vstupu obdrží seznam hodnot
+(libovolného typu) a vrátí zpět seznam posloupností, který splňuje:
 
- - každá posloupnost je striktně rostoucí a nelze ji zleva ani zprava prodloužit
- - sloučením všech posloupností dostaneme vstupní seznam
+- každá posloupnost je striktně rostoucí a nelze ji zleva ani zprava prodloužit
+- sloučením všech posloupností dostaneme vstupní seznam
 
 Příklad:
+
 ```haskell
 ghci> ascending [1,2,3,4,3,2,1,2]
 [[1,2,3,4],[3],[2],[1,2]]
@@ -1789,12 +2014,16 @@ ghci> let x = [1,2,3,1,2,3] in concat (ascending x) == x
 True
 ```
 
- 1. Definujte typovou signaturu funkce ``ascending``.
- 2. Definujte vlastní funkci.
- 3. Jak byste zobecnili tuto funkci tak, aby ji bylo možné použít s libovolným porovnávacím operátorem?
- 4. Bude vaše definice fungovat i na nekonečných seznamech? Pokud ano, vysvětlete proč. Pokud ne, dala by se vaše definice takto upravit? Zdůvodněte proč.
+1. Definujte typovou signaturu funkce ``ascending``.
+2. Definujte vlastní funkci.
+3. Jak byste zobecnili tuto funkci tak, aby ji bylo možné použít s libovolným
+   porovnávacím operátorem?
+4. Bude vaše definice fungovat i na nekonečných seznamech? Pokud ano,
+   vysvětlete proč. Pokud ne, dala by se vaše definice takto upravit?
+   Zdůvodněte proč.
 
 Řešení:
+
 ```haskell
 ascending :: Ord a => [a] -> [[a]]
 ascending [] = []
@@ -1816,13 +2045,23 @@ Zdroj: [MFF Forum: Zkouška 16. 7. 2020](http://forum.matfyz.info/viewtopic.php?
     - Hodnoty jsou uloženy ve vnitřních uzlech.
     - Pokuste se o co nejobecnější definici.
     - Nezapomeňte na reprezentaci prázdného stromu.
- 2. Definujte funkci ``replicateT``. Výsledkem ``replicateT n a`` je binární strom, který obsahuje ``n`` kopií hodnoty ``a``.
-    - Výsledný strom by měl mít minimální možnou hloubku. Např. strom ``replicateT 7 a`` by měl mít hloubku 3.
- 3. Definujte funkci ``zipWithT`` jako zobecnění funkce ``zipWith``. ``zipWithT f t1 t2`` sloučí prvky stromů ``t1`` a ``t2`` na stejných pozicích pomocí funkce f.
-    - Pokud nemá nějaký prvek z jednoho stromu odpovídající prvek na stejné pozici v druhém stromě, tak jej do výsledného stromu nepřidávejte. Např. pro prázdný strom empty by mělo platit ``zipWithT f t empty == empty`` a ``zipWithT f empty t == empty``.
- 4. Pomocí ``replicateT`` a ``zipWithT`` definujte funkci ``cut``. Funkce ``cut n t`` odstraní ze stromu ``t ``všechny vrcholy, jejichž hloubka je ostře větší než ``n``.
+ 2. Definujte funkci ``replicateT``. Výsledkem ``replicateT n a`` je binární
+    strom, který obsahuje ``n`` kopií hodnoty ``a``.
+    - Výsledný strom by měl mít minimální možnou hloubku. Např. strom
+      ``replicateT 7 a`` by měl mít hloubku 3.
+ 3. Definujte funkci ``zipWithT`` jako zobecnění funkce ``zipWith``. ``zipWithT
+    f t1 t2`` sloučí prvky stromů ``t1`` a ``t2`` na stejných pozicích pomocí
+    funkce f.
+    - Pokud nemá nějaký prvek z jednoho stromu odpovídající prvek na stejné
+      pozici v druhém stromě, tak jej do výsledného stromu nepřidávejte. Např.
+      pro prázdný strom empty by mělo platit ``zipWithT f t empty == empty`` a
+      ``zipWithT f empty t == empty``.
+ 4. Pomocí ``replicateT`` a ``zipWithT`` definujte funkci ``cut``. Funkce ``cut
+    n t`` odstraní ze stromu ``t`` všechny vrcholy, jejichž hloubka je ostře
+    větší než ``n``.
 
 Řešení:
+
 ```haskell
 data Tree a = Null
             | Tree (Tree a) a (Tree a)
@@ -1858,9 +2097,11 @@ Zdroj: [MFF Forum: Zkouška 24. 6. 2020](http://forum.matfyz.info/viewtopic.php?
 Cílem je definovat binární funkci klouzave, která
 
 - obdrží na vstupu posloupnost čísel a přirozené číslo ``n``
-- a vrátí posloupnost klouzavých průměrů řádu ``n``, tj. aritmetických průměrů ``n`` sousedních prvků.
+- a vrátí posloupnost klouzavých průměrů řádu ``n``, tj. aritmetických průměrů
+  ``n`` sousedních prvků.
 
 Příklad:
+
 ```haskell
 klouzave [1.5, 2.5, 3.5, 4.5, 5.5] 3
 [2.5,3.5,4.5]
@@ -1868,9 +2109,13 @@ klouzave [1.5, 2.5, 3.5, 4.5, 5.5] 3
 
 1. Definujte typovou signaturu funkce ``klouzave``
 2. Definujte vlastní funkci s explicitním využitím rekurze
-3. Sestavte alternativní definici, tentokráte bez explicitního použití rekurze, přitom můžete využívat libovolné knihovní funkce z přiloženého seznamu.
-4. Vyhýbá se alespoň jedna z vašich definic opakovaným výpočtům? Pokud ne, dala by se takto upravit? Zdůvodněte.
-5. Bude některá z vašich definic fungovat i na nekonečných seznamech? Pokud ano, vysvětlete proč. Pokud ne, dala by se některá z vašich definic takto upravit? Zdůvodněte.
+3. Sestavte alternativní definici, tentokráte bez explicitního použití rekurze,
+   přitom můžete využívat libovolné knihovní funkce z přiloženého seznamu.
+4. Vyhýbá se alespoň jedna z vašich definic opakovaným výpočtům? Pokud ne, dala
+   by se takto upravit? Zdůvodněte.
+5. Bude některá z vašich definic fungovat i na nekonečných seznamech? Pokud
+   ano, vysvětlete proč. Pokud ne, dala by se některá z vašich definic takto
+   upravit? Zdůvodněte.
 
 ```haskell
 take 5 $ klouzave [1..] 10
@@ -1878,6 +2123,7 @@ take 5 $ klouzave [1..] 10
 ```
 
 Řešení:
+
 ```haskell
 klouzave :: [Double] -> Int -> [Double]
 klouzave _  0 = []
@@ -1911,14 +2157,20 @@ Zdroj: [MFF Forum: Zkouška 24. 6. 2020](http://forum.matfyz.info/viewtopic.php?
 
 Cílem toho problému je zobecnit funkce ``foldr`` / ``foldl`` na obecné kořenové stromy.
 
-1. Definujte datový typ pro reprezentaci obecných kořenových stromů s ohodnocenými vrcholy:
+1. Definujte datový typ pro reprezentaci obecných kořenových stromů s
+   ohodnocenými vrcholy:
     - snažte se o co nejobecnější definici
     - nezapomeňte na reprezentaci prázdného stromu
-2. Funkce ``foldl`` a ``foldr`` zobecněte na funkci ``foldT``, která bude - namísto seznamu - procházet stromem ve vaší reprezentaci popsané v **1.**.
-3. Pomocí funkce fold definujte funkci ``arita,`` která vrátí ``aritu`` (tj. maximální počet dětí přes všechny vrcholy) zadaného kořenového stromu.
-4. Pomocí funkce ``foldT`` definujte funkci ``pdc``, která vrátí průměrnou délku cesty z kořene do listu (tj. součet délek všech cest z kořene do listu / počet listů).
-    
+2. Funkce ``foldl`` a ``foldr`` zobecněte na funkci ``foldT``, která bude -
+   namísto seznamu - procházet stromem ve vaší reprezentaci popsané v **1.**.
+3. Pomocí funkce fold definujte funkci ``arita,`` která vrátí ``aritu`` (tj.
+   maximální počet dětí přes všechny vrcholy) zadaného kořenového stromu.
+4. Pomocí funkce ``foldT`` definujte funkci ``pdc``, která vrátí průměrnou
+   délku cesty z kořene do listu (tj. součet délek všech cest z kořene do listu
+   / počet listů).
+
 Řešení:
+
 ```haskell
 -- NOTE: Tree a [] is invalid
 data Tree a = Null
@@ -1946,24 +2198,30 @@ testTree = Tree
   , Tree 3 [Null, Null, Null, Null]
   ]
 ```
-    
+
 ### Deleni stromu
 
 Zdroj: [MFF Forum: Zkouška 12. 6. 2020 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=12066&sid=fe143536d7d0b2e925781a412fafbdc7)
 
-Rozdělte zadaný binární vyhledávací strom ``T`` na ``n+1`` binárních vyhledávacích stromů ``T_0, .. , T_n`` podle zadaných vstupních hodnot ``k_i``, ``1 <= i <= n`` tak, že ve stromě ``T_i`` jsou hodnoty ``x``, ``k_i <= x < k_i+1``, pokud jsou nerovnosti aplikovatelné.
+Rozdělte zadaný binární vyhledávací strom ``T`` na ``n+1`` binárních
+vyhledávacích stromů ``T_0, .. , T_n`` podle zadaných vstupních hodnot ``k_i``,
+``1 <= i <= n`` tak, že ve stromě ``T_i`` jsou hodnoty ``x``, ``k_i <= x <
+k_i+1``, pokud jsou nerovnosti aplikovatelné.
 
 Obrázek
-![](https://i.imgur.com/sNvonyI.png)
+![priklad vstupu](https://i.imgur.com/sNvonyI.png)
 
 Snažte se o efektivitu, celé podstromy patřící do jednoho pruhu zpracujte najednou.
 
-1. Definujte datový typ pro reprezentaci binárních vyhledávacích stromů. Snažte se o co nejobecnější definici.
+1. Definujte datový typ pro reprezentaci binárních vyhledávacích stromů. Snažte
+   se o co nejobecnější definici.
 2. Definujte typovou signaturu funkce ``pruhy``, včetně typových tříd.
-3. Funkci ``pruhy`` definujte. Budete-li používat pomocné funkce, u každé popište její význam.
+3. Funkci ``pruhy`` definujte. Budete-li používat pomocné funkce, u každé
+   popište její význam.
 4. Pokuste se stručně zdůvodnit korektnost vaší defnice.
 
 Řešení:
+
 ```haskell
 data BTree a = Nil
           | BTree (BTree a) a (BTree a)
@@ -1991,29 +2249,38 @@ testTree =
 
 Zdroj: [MFF Forum: Zkouška 12. 6. 2020 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=12066&sid=fe143536d7d0b2e925781a412fafbdc7)
 
-Definujte funkce ``rle`` a ``rld``, které realizují run-length encoding a decoding. Funkce
+Definujte funkce ``rle`` a ``rld``, které realizují run-length encoding a
+decoding. Funkce
 
 ```haskell
 rle :: Eq a => [a] -> [Either a (a,Int)]
 ```
 
-zakóduje co nejdelší úseky stejných prvků ve vstupním seznamu do dvojice ``(prvek, počet)`` typu ``Either`` s datovým konstruktorem ``Right``.
+zakóduje co nejdelší úseky stejných prvků ve vstupním seznamu do dvojice
+``(prvek, počet)`` typu ``Either`` s datovým konstruktorem ``Right``.
 
-Pokud je prvek v úseku sám, kóduje se pouze prvek vnořený do typu ``Either`` s datovým konstruktorem ``Left``.
+Pokud je prvek v úseku sám, kóduje se pouze prvek vnořený do typu ``Either`` s
+datovým konstruktorem ``Left``.
 
 Příklad:
+
 ```haskell
-> rle ”abbcccda” 
+> rle ”abbcccda”
 [Left 'a', Right ('b',2), Right ('c',3), Left 'd', Left 'a']
 ```
 
-1. Definujte funkci ``rle`` s využitím rekurze, ale bez použití stručných seznamů či funkcí vyšších řádů (funkce s funkcionálními parametry).
-2. Definujte funkci ``rle`` bez explicitního využití rekurze, ale za použití stručných seznamů či funkcí vyšších řádů.
-3. Definujte typovou signaturu funkce ``rld``, která realizuje dekompresi, tj. převod ze seznamu úseků na původní seznam prvků.
+1. Definujte funkci ``rle`` s využitím rekurze, ale bez použití stručných
+   seznamů či funkcí vyšších řádů (funkce s funkcionálními parametry).
+2. Definujte funkci ``rle`` bez explicitního využití rekurze, ale za použití
+   stručných seznamů či funkcí vyšších řádů.
+3. Definujte typovou signaturu funkce ``rld``, která realizuje dekompresi, tj.
+   převod ze seznamu úseků na původní seznam prvků.
 4. Definujte funkci ``rld.`` Použijte přitom funkci ``map`` či ``concat``.
-5. Bude některá z funkcí fungovat i na nekonečných seznamech? Proč ano nebo proč ne?
+5. Bude některá z funkcí fungovat i na nekonečných seznamech? Proč ano nebo
+   proč ne?
 
 Řešení:
+
 ```haskell
 rle :: Eq a => [a] -> [Either a (a, Int)]
 rle []       = []
@@ -2045,16 +2312,21 @@ rle2 xs =
 Zdroj: [MFF Forum: 10. 9. 2019 - Dvořák](http://forum.matfyz.info/viewtopic.php?f=169&t=11977&sid=fe143536d7d0b2e925781a412fafbdc8)
 
 Definujte funkce:
-```
+
+```none
 prevod1 cislo puvodni
 ```
-pro převod čísla z číselné soustavy o základu ``puvodni`` do ``dekadické číselné soustavy``, a
 
+pro převod čísla z číselné soustavy o základu ``puvodni`` do ``dekadické
+číselné soustavy``, a
+
+```none
+prevod2 cislo nova
 ```
-prevod2 cislo nova 
-```
+
 pro převod čísla z dekadické do číselné soustavy o základu ``nova``.
 Příklad:
+
 ```haskell
 > prevod1 [1,1,1,0] 2    -- převede binární 1110 do desítkové soustavy
  14
@@ -2064,23 +2336,27 @@ Příklad:
 
 1. Doplňte typové signatury definovaných funkcí
 
-```
-prevod1 :: 
-prevod2 :: 
-```
+    ```haskell
+    prevod1 ::
+    prevod2 ::
+    ```
 
 2. Definujte funkci ``prevod1`` s využitím rekurze.
-3. Sestavte alternativní definici funkce prevod1 s využitím alespoň jedné z funkcí ``map``, ``filter``, ``foldr`` či ``foldl``, ale bez (explicitního) použití rekurze.
-4. Definujte funkci ``prevod2`` s využitím funkce ``unfold`` definované následovně:
+3. Sestavte alternativní definici funkce prevod1 s využitím alespoň jedné z
+   funkcí ``map``, ``filter``, ``foldr`` či ``foldl``, ale bez (explicitního)
+   použití rekurze.
+4. Definujte funkci ``prevod2`` s využitím funkce ``unfold`` definované
+   následovně:
 
-```haskell
-unfold :: (t -> Bool) -> (t -> (a, t)) -> t -> [a]
-unfold done step x =  if done x then []
-                                else let (y,ys) = step x 
-                                     in y: unfold done step ys
-```
+    ```haskell
+    unfold :: (t -> Bool) -> (t -> (a, t)) -> t -> [a]
+    unfold done step x =  if done x then []
+                                    else let (y,ys) = step x
+                                         in y: unfold done step ys
+    ```
 
 Řešení:
+
 ```haskell
 prevod1 :: [Int] -> Int -> Int
 prevod1 ds base = go ds 0
@@ -2106,18 +2382,26 @@ prevod2 n base = reverse $ unfold (== 0) (`moddiv` base) n
 
 Zdroj: [MFF Forum: 10. 9. 2019 - Dvořák](http://forum.matfyz.info/viewtopic.php?f=169&t=11977&sid=fe143536d7d0b2e925781a412fafbdc8)
 
-Definujte unární funkci rady, která obdrží multiplikativní tabulku grupy jako matici prvků. První řádek matice obsahuje násobení grupovou jednotkou ``e`` a pořadí prvků odpovídající řádkům a sloupcům je stejné. Vydá seznam všech prvků spolu s jejich řády.
+Definujte unární funkci rady, která obdrží multiplikativní tabulku grupy jako
+matici prvků. První řádek matice obsahuje násobení grupovou jednotkou ``e`` a
+pořadí prvků odpovídající řádkům a sloupcům je stejné. Vydá seznam všech prvků
+spolu s jejich řády.
 
-Řád prvku ``p`` je nejmenší přirozené číslo ``n ``takové, že ``n``-tá mocnina ``p`` je rovna ``e``.
+Řád prvku ``p`` je nejmenší přirozené číslo ``n`` takové, že ``n``-tá mocnina
+``p`` je rovna ``e``.
+
 1. Definujte typovou signaturu funkce ``rady``.
 2. Funkci ``rady`` definujte.
 
 Příklad:
+
 ```haskell
 > rady [["e","a","b"], ["a","b","e"], ["b","e","a"]]
 [("e",1), ("a",3), ("b",3)]
 ```
+
 Řešení:
+
 ```haskell
 rady :: Eq a => [[a]] -> [(a, Int)]
 rady []                           = []
@@ -2150,19 +2434,22 @@ Je dána číselná matice ``A``. Definujte funkci
 kumulace :: Num a => [[a]] -> [[a]]
 ```
 
-která z matice ``A`` vyrobí matici ``B ``stejných rozměrů (viz příklad níže).
+která z matice ``A`` vyrobí matici ``B`` stejných rozměrů (viz příklad níže).
 
-Každý prvek na souřadnicích ``(i,j)`` bude roven součtu všech hodnot v submatici s levým horním rohem ``(0,0)``a pravým dolním rohem ``(i,j)``.
+Každý prvek na souřadnicích ``(i,j)`` bude roven součtu všech hodnot v
+submatici s levým horním rohem ``(0,0)``a pravým dolním rohem ``(i,j)``.
 
 *Poznámka: Snažte se vyhnout opakování stejných výpočtů.*
 
 Příklad:
+
 ```haskell
 > kumulace[[1,1,1],[1,2,1],[0,1,0],[1,1,-4]]
 [[1,2,3],[2,5,7],[2,6,8],[3,8,6]]
 ```
 
 Řešení:
+
 ```haskell
 kumulace :: Num a => [[a]] -> [[a]]
 kumulace []    = []
@@ -2187,18 +2474,27 @@ kumulace table = memo
 
 Zdroj: [MFF Forum: 24.6.2019 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=11969&sid=fe143536d7d0b2e925781a412fafbdc8)
 
-Hypergraf je zadán množinou vrcholů a množinou hyperhran, což jsou alespoň dvouprvkové podmnožiny množiny vrcholů. Naší cílem je definovat funkci doplnění, která doplní do hypergrafu ``H`` všechny dvouprvkové (hyper)hrany pro ty dvojice vrcholů, které nejsou společně obsaženy v žádné hyperhraně vstupního hypergrafu ``H``. Funkce tedy např. z hypergrafu s vrcholy ``{1,2,3,4,5}`` a hyperhranani ``{1,3,5}`` a ``{2,3,4}`` vytvoří hypergraf se stejnými vrcholy a hyperhranami ``{1,3,5},{2,3,4},{1,2},{1,4},{5,2}`` a ``{5,4}``
+Hypergraf je zadán množinou vrcholů a množinou hyperhran, což jsou alespoň
+dvouprvkové podmnožiny množiny vrcholů. Naší cílem je definovat funkci
+doplnění, která doplní do hypergrafu ``H`` všechny dvouprvkové (hyper)hrany pro
+ty dvojice vrcholů, které nejsou společně obsaženy v žádné hyperhraně vstupního
+hypergrafu ``H``. Funkce tedy např. z hypergrafu s vrcholy ``{1,2,3,4,5}`` a
+hyperhranani ``{1,3,5}`` a ``{2,3,4}`` vytvoří hypergraf se stejnými vrcholy a
+hyperhranami ``{1,3,5},{2,3,4},{1,2},{1,4},{5,2}`` a ``{5,4}``
 
-1. Definujte datový typ pro reprezentaci hypergrafu. Pokuste se o co nejobecnější definici (vrcholy mohou být reprezentovány nejen čísly, ale i znaky, řetězci apod.)
+1. Definujte datový typ pro reprezentaci hypergrafu. Pokuste se o co
+   nejobecnější definici (vrcholy mohou být reprezentovány nejen čísly, ale i
+   znaky, řetězci apod.)
 2. Specifikujte typovou signaturu funkce
 
-```
-doplneni ::
-```
+    ```haskell
+    doplneni ::
+    ```
 
 3. Funkci definujte.
-    
+
 Řešení:
+
 ```haskell
 data HGraph a = HGraph [a] [[a]]
   deriving (Eq, Show)
@@ -2237,16 +2533,22 @@ doplneni (HGraph vs es) = HGraph vs (es ++ newEdges)
 
 Zdroj: [Zkouška 10.6.2019 (Dvořák + Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=11954)
 
-Na vstupu je zadán text jako hodnota typu ``String``. Naším cílem je definovat binární funkci ``stat text n``, která
+Na vstupu je zadán text jako hodnota typu ``String``. Naším cílem je definovat
+binární funkci ``stat text n``, která
 
- - obdrží takový text a přirozené číslo ``n``
- - vrátí všechna slova z tohoto textu o délce alespoň ``n``, setříděná lexikograficky
- - každé slovo s čísly řádků, kde se slovo vyskytuje
+- obdrží takový text a přirozené číslo ``n``
+- vrátí všechna slova z tohoto textu o délce alespoň ``n``, setříděná lexikograficky
+- každé slovo s čísly řádků, kde se slovo vyskytuje
 
-Řádky jsou ukončeny znakem ``'\n'``. Slovo je každý maximální podřetězec textu neobsahující mezeru ``' '``, tabulátor ``'\t'`` či konec řádku ``'\n'``.
-1. Definujte datovou strukturu pro reprezentaci oboru hodnot funkce stat (pomocí data nebo type).
+Řádky jsou ukončeny znakem ``'\n'``. Slovo je každý maximální podřetězec textu
+neobsahující mezeru ``' '``, tabulátor ``'\t'`` či konec řádku ``'\n'``.
+
+1. Definujte datovou strukturu pro reprezentaci oboru hodnot funkce stat
+   (pomocí data nebo type).
 2. Definujte typovou signaturu funkce stat s použití datové struktury z **1.**.
 3. Funkci stat definujte.
+
+Řešení:
 
 ```haskell
 newtype Stat = Stat [(Int, String)]
@@ -2292,20 +2594,24 @@ stat text n = Stat sortedWords
 
 Zdroj: [MFF Forum: Zkouška 21.6.2018](http://forum.matfyz.info/viewtopic.php?f=169&t=11747)
 
-Ohodnotit vrcholy obecného n-arní stromu v pořadí v jakém jsou vrcholy uzavírány, takže post-fixově. Měla se napsat datová struktura pro strom, typová hlavička fce a pak tu funkci implementovat:
+Ohodnotit vrcholy obecného n-arní stromu v pořadí v jakém jsou vrcholy
+uzavírány, takže post-fixově. Měla se napsat datová struktura pro strom, typová
+hlavička fce a pak tu funkci implementovat:
 
 ```haskell
 data Tree a = Nil | Tree a [Tree a]
-label :: Tree a -> Tree (a, Int)                                       
+label :: Tree a -> Tree (a, Int)
 ```
 
 Příklad
+
 ```haskell
 > label $ Tree 1 [Tree 1 [Nil],Nil,Tree 2 [Tree 4 [Tree 5 [Nil],Tree 6 [Nil]]],Tree 3 [Nil,Nil,Nil,Nil]]
 Tree (1,7) [Tree (1,1) [Nil],Nil,Tree (2,5) [Tree (4,4) [Tree (5,2) [Nil],Tree (6,3) [Nil]]],Tree (3,6) [Nil,Nil,Nil,Nil]]
 ```
 
 Řešení:
+
 ```haskell
 data Tree a = Nil | Tree a [Tree a]
   deriving (Eq, Show)
@@ -2335,11 +2641,15 @@ sequentialLabel n (tree : ts) =
 Zdroj: [MFF Forum: Zkouška 26.6.2018](http://forum.matfyz.info/viewtopic.php?f=169&t=11756)
 
 Definujte funkci ``change``, která:
- - obdrží seznam, který reprezentuje abecedu povolených prvků, které lze využít k modifikaci
- - obdrží seznam ``xs`` pro modifikaci
- - vrátí seznam všech modifikací vstupního seznamu ``xs``, které se od něho liší v právě 3 prvcích.
+
+- obdrží seznam, který reprezentuje abecedu povolených prvků, které lze využít
+  k modifikaci
+- obdrží seznam ``xs`` pro modifikaci
+- vrátí seznam všech modifikací vstupního seznamu ``xs``, které se od něho liší
+  v právě 3 prvcích.
 
 Příklad:
+
 ```haskell
 > change3 "ab" "aabe"
 ["bbae", "bbba", "bbbb", "baaa", "baab", "abaa", "abab"]
@@ -2349,6 +2659,7 @@ Příklad:
 2. Definujte funkci ``change3``
 
 Řešení:
+
 ```haskell
 change3 :: Eq a => [a] -> [a] -> [[a]]
 change3 cs xs = map snd $ filter (\(count, _) -> count == 3) $ change' cs xs
@@ -2370,9 +2681,13 @@ change' cs (x : xs) = changed ++ notChanged
 
 Zdroj: [MFF Forum: Zkouška 6. 6. 2016 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=10961)
 
-Máme zadanou matici (jako seznam seznamů). Naším cílem je vypsat seznam všech dvojic ``(x, y)`` takových, že podmatice ``(1, 1):(x, y)`` bude obsahovat pouze kladné hodnoty. Dvojice ``(x, y)`` musí být vždy nejvyšší možné (t. j. nelze ani v jedne souradnici zvětšit)
+Máme zadanou matici (jako seznam seznamů). Naším cílem je vypsat seznam všech
+dvojic ``(x, y)`` takových, že podmatice ``(1, 1):(x, y)`` bude obsahovat pouze
+kladné hodnoty. Dvojice ``(x, y)`` musí být vždy nejvyšší možné (t. j. nelze
+ani v jedne souradnici zvětšit)
 
 Řešení:
+
 ```haskell
 scan :: (b -> a -> b) -> b -> [a] -> [b]
 scan _ acc []       = [acc]
@@ -2403,14 +2718,18 @@ maxPositive matrix =
 Zdroj: [MFF Forum: Zkouška 6. 6. 2016 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=10961)
 
 1. Napiste fold pro binarni stromy
-```haskell
-data Tree a = Leaf a | Tree (Tree a) (Tree a)
-fold :: (a -> b) -> (b -> b -> b) -> Tree a -> b
-```
-2. Napiste one-liner funkci, ktera vypise minimum a maximum z celeho stromu pomoci vami napsaneho foldu.
+
+    ```haskell
+    data Tree a = Leaf a | Tree (Tree a) (Tree a)
+    fold :: (a -> b) -> (b -> b -> b) -> Tree a -> b
+    ```
+
+2. Napiste one-liner funkci, ktera vypise minimum a maximum z celeho stromu
+   pomoci vami napsaneho foldu.
 3. Napiste hlavicku funkce z **2.**
 
 Řešení:
+
 ```haskell
 data Tree a = Leaf a | Tree (Tree a) (Tree a)
   deriving (Eq, Show)
@@ -2434,9 +2753,11 @@ minmaxT = fold
 
 Zdroj: [MFF Forum: Zkouška 22.6.](http://forum.matfyz.info/viewtopic.php?f=169&t=11412)
 
-Máme obdélníkovou tabulku uloženou po řádcích jako seznam seznamů Intů. Vymažte z ní všechny sloupce, které neobsahují žádnou nulu.
+Máme obdélníkovou tabulku uloženou po řádcích jako seznam seznamů Intů. Vymažte
+z ní všechny sloupce, které neobsahují žádnou nulu.
 
 Řešení:
+
 ```haskell
 transpose :: [[a]] -> [[a]]
 transpose []     = []
@@ -2453,18 +2774,24 @@ tetris = transpose . removeFull . transpose
 
 Zdroj: [MFF Forum: Zkouska 20.9.2017](http://forum.matfyz.info/viewtopic.php?f=169&t=11466)
 
-Funkce ``podminky`` dostává seznam podmínek jedné proměnné a seznam hodnot. Vydává seznam seznamů hodnot, kde ``i``-tý seznam na výstupu obsahuje hodnoty, pro které byla splněna ``i``-tá podmínka a nebyly splněny předchozí podmínky. Hodnoty, pro které nebyla splněna žádná podmínka, se zahodí.
+Funkce ``podminky`` dostává seznam podmínek jedné proměnné a seznam hodnot.
+Vydává seznam seznamů hodnot, kde ``i``-tý seznam na výstupu obsahuje hodnoty,
+pro které byla splněna ``i``-tá podmínka a nebyly splněny předchozí podmínky.
+Hodnoty, pro které nebyla splněna žádná podmínka, se zahodí.
 
 Příklad:
+
 ```haskell
 > podminky [even,(>5),(==3)] [0..9]
 [[0,2,4,6,8],[7,9],[3]]
 ```
 
-1. Napište typovou signaturu funkce podmínky (co nejobecnější, včetně případných typových tříd).
+1. Napište typovou signaturu funkce podmínky (co nejobecnější, včetně
+   případných typových tříd).
 2. Napište funkci ``podminky``.
 
 Řešení:
+
 ```haskell
 podminky :: [a -> Bool] -> [a] -> [[a]]
 podminky []       _  = []
@@ -2476,18 +2803,26 @@ podminky (f : fs) xs = filter f xs : podminky fs rest
 
 Zdroj: [MFF Forum: Zkouska 20.9.2017](http://forum.matfyz.info/viewtopic.php?f=169&t=11466)
 
-Cílem tohoto problému je zobecnit standardní funkci ``take`` na funkci ``takeTree``, která
- - obdrží obecný kořenový strom a dvě přirozená čísla ``n`` a ``m``
- - odstraní ve stromě všechny vrcholy ve hloubce větší než ``m`` (hloubka vrcholu ``v`` je počet hran na cestě z kořene do ``v``)
- - pro každý vrchol, který má více než ``n`` dětí, odstraní všechny děti (s příslušnými podstromy) kromě ``n`` nejlevějších
- - výsledný (nejvýše ``n``-ární) strom (hloubky nejvýše ``m``) vrátí.
- 
-1. Definujte datový typ pro obecný kořenový strom, v jehož vrcholech jsou uloženy prvky typu ``a``.
-2. Využijte váš datový typ k definici nekonečného stromu, tj. takového stromu, že pro každé přirozené číslo ``i`` buďto existuje vrchol s alespoň ``i`` dětmi, nebo existuje vrchol ve hloubce alespoň ``i``.
+Cílem tohoto problému je zobecnit standardní funkci ``take`` na funkci
+``takeTree``, která
+
+- obdrží obecný kořenový strom a dvě přirozená čísla ``n`` a ``m``
+- odstraní ve stromě všechny vrcholy ve hloubce větší než ``m`` (hloubka
+  vrcholu ``v`` je počet hran na cestě z kořene do ``v``)
+- pro každý vrchol, který má více než ``n`` dětí, odstraní všechny děti (s
+  příslušnými podstromy) kromě ``n`` nejlevějších
+- výsledný (nejvýše ``n``-ární) strom (hloubky nejvýše ``m``) vrátí.
+
+1. Definujte datový typ pro obecný kořenový strom, v jehož vrcholech jsou
+   uloženy prvky typu ``a``.
+2. Využijte váš datový typ k definici nekonečného stromu, tj. takového stromu,
+   že pro každé přirozené číslo ``i`` buďto existuje vrchol s alespoň ``i``
+   dětmi, nebo existuje vrchol ve hloubce alespoň ``i``.
 3. Definujte typovou signaturu funkce ``takeTree``.
 4. Funkci ``takeTree`` definujte.
 
 Řešení:
+
 ```haskell
 data Tree a = Nil | Tree a [Tree a]
   deriving (Eq, Show)
@@ -2509,17 +2844,21 @@ takeTree n m = go 0
 Zdroj: [MFF Forum: Zkouška 13. 9. 2017](http://forum.matfyz.info/viewtopic.php?f=169&t=11457)
 
 Máme typ:
+
 ```haskell
 data Formule = Konst Bool | Not Formule | And Formule Formule | Or Formule Formule
 ```
+
 a chceme napsat funci ``gen``, která vygeneruje nekonečný seznam složený z formulí:
 
 Příklad:
+
 ```haskell
 gen = [ Konst True, Konst Flase, Not True, Not False, And True True, ... ]
 ```
 
 Řešení:
+
 ```haskell
 data Formule = Konst Bool
              | Not Formule
@@ -2552,15 +2891,19 @@ Máme dva druhy stromů - obecný n-ární:
 ```haskell
 data NTree a = NTree a [NTree a]
 ```
+
 a n-ární, ve kterém je řečeno, které podstromy jsou vlevo a které vpravo:
 
 ```haskell
 data UspTree a = UspTree [UspTree a] a [UspTree a]
 ```
 
-Máme napsat funkci, která obecný n-ární strom převede na uspořádaný strom. V každém uzlu obecného n-árního stromu na vstupu je kromě hodnoty uložený taky počet synů, kteří jsou vlevo.
+Máme napsat funkci, která obecný n-ární strom převede na uspořádaný strom. V
+každém uzlu obecného n-árního stromu na vstupu je kromě hodnoty uložený taky
+počet synů, kteří jsou vlevo.
 
 Řešení:
+
 ```haskell
 data NTree a = NTree a [NTree a]
   deriving (Eq, Show)
@@ -2578,22 +2921,26 @@ prevodT (NTree (n, val) ts) = UspTree (take n ts') val (drop n ts')
 
 Zdroj: [MFF Forum: Zkouška 29.5.2017](http://forum.matfyz.info/viewtopic.php?f=169&t=11357)
 
-- Navrhněte datový typ ``Graf`` a pro reprezentaci konečného neorientovaného grafu s vrcholy typu ``a``.
-- Definujte funkci ``troj :: Graf a -> Int``, která k takovému grafu vrátí počet všech jeho trojúhelníků.
+- Navrhněte datový typ ``Graf`` a pro reprezentaci konečného neorientovaného
+  grafu s vrcholy typu ``a``.
+- Definujte funkci ``troj :: Graf a -> Int``, která k takovému grafu vrátí
+  počet všech jeho trojúhelníků.
 
 Priklad:
+
 ```haskell
-> let 
-testGraph = Graph [0..8] 
+> let
+testGraph = Graph [0..8]
                   [(0, 1), (0, 3), (1, 0), (1, 2), (1, 3), (2, 1), (2, 4),
                    (3, 0), (3, 1), (3, 5), (4, 2), (4, 5), (5, 3), (5, 4),
                    (5, 6), (6, 5), (6, 7), (6, 8), (7, 6), (7, 8), (8, 6),
                    (8, 7)]
-> troj testGraph 
+> troj testGraph
 [(0,1,3),(6,7,8)]
 ```
 
 Řešení:
+
 ```haskell
 type Edge a = (a, a)
 
@@ -2627,24 +2974,29 @@ Je dán datový typ
 data Bag a = Item a | Items [Bag a]
 ```
 
-1. Definujte funkci ``fold`` pro obecný průchod touto datovou strukturou (to ``(a->b)`` tam zastupuje počáteční hodnotu v normálním foldu)
+1. Definujte funkci ``fold`` pro obecný průchod touto datovou strukturou (to
+   ``(a->b)`` tam zastupuje počáteční hodnotu v normálním foldu)
 
-```haskell
-fold :: (a -> b) -> ([b] -> b) -> Bag a -> b
-```
+    ```haskell
+    fold :: (a -> b) -> ([b] -> b) -> Bag a -> b
+    ```
 
-2. Pomocí funkce fold definujte funkci ``listy`` která posbírá všechny hodnoty z položek ``Item ``ze všech úrovní zleva.
+2. Pomocí funkce fold definujte funkci ``listy`` která posbírá všechny hodnoty
+   z položek ``Item`` ze všech úrovní zleva.
+
 ```haskell
 listy :: Bag a -> [a]
 ```
 
 Příklad:
+
 ```haskell
 > listy (Items [Item 1,Items [Item 2, Item 3], Items [Items [Item 4]]])
 [1,2,3,4]
 ```
 
 Řešení:
+
 ```haskell
 data Bag a = Item a | Items [Bag a]
   deriving (Eq, Show)
@@ -2661,13 +3013,21 @@ listy = fold (: []) concat
 
 Zdroj: [MFF Forum: Zkouška 13. 6. 2016 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=10963)
 
-Máte nějakou funkci, která nabývá jen dvou různých funkčních hodnot. Funkce přechází někde (nevíme kde) skokově z jedné funkční hodnoty na druhou. Na vstupu dostanete ``c`` a ``d`` určující ony dvě funkční hodnoty. Dále dostanete seznam ``(x, y)`` bodů, ve kterých jste funkci změřili s nějakou chybou.
+Máte nějakou funkci, která nabývá jen dvou různých funkčních hodnot. Funkce
+přechází někde (nevíme kde) skokově z jedné funkční hodnoty na druhou. Na
+vstupu dostanete ``c`` a ``d`` určující ony dvě funkční hodnoty. Dále dostanete
+seznam ``(x, y)`` bodů, ve kterých jste funkci změřili s nějakou chybou.
 
-Napište funkci, která na výstupu tyto body rozdělí na levé a pravé (seznam dvou seznamů) podle toho, které body patří ještě k hodnotě ``c``, a které už k hodnotě ``d``.
+Napište funkci, která na výstupu tyto body rozdělí na levé a pravé (seznam dvou
+seznamů) podle toho, které body patří ještě k hodnotě ``c``, a které už k
+hodnotě ``d``.
 
-Pozor, je potřeba minimalizovat celkovou odchylku spočtenou jako součet ``(f(x_i) - y_i)^2`` přes všechny body, kde ``f(x)`` je změřená hodnota (ze seznamu) a ``y`` skutečná hodnota z našeho odhadu.
+Pozor, je potřeba minimalizovat celkovou odchylku spočtenou jako součet
+``(f(x_i) - y_i)^2`` přes všechny body, kde ``f(x)`` je změřená hodnota (ze
+seznamu) a ``y`` skutečná hodnota z našeho odhadu.
 
 Řešení:
+
 ```haskell
 sortBy :: Ord b => (a -> b) -> [a] -> [a]
 sortBy _ []       = []
@@ -2698,15 +3058,20 @@ skok c d ps = snd $ minimumBy fst cuts
 
 Zdroj: [MFF Forum: Zkouška 28.6.2016 - Dvořák, Hric](http://forum.matfyz.info/viewtopic.php?f=169&t=10993)
 
-Mějme řídké polynomy reprezentované pomocí ``[(nenulový koeficient,exponent)]``. Definujte pro ně datový typ (nezapomeňte na nulový polynom) a napište funkci ``mult`` (i její datovou signaturu), která bude řídké polynomy násobit.
+Mějme řídké polynomy reprezentované pomocí ``[(nenulový
+koeficient,exponent)]``. Definujte pro ně datový typ (nezapomeňte na nulový
+polynom) a napište funkci ``mult`` (i její datovou signaturu), která bude řídké
+polynomy násobit.
 
-- *řídký polynom*: u spousty exponentů je nulový koeficient (exponenty prostě nejdou po 1, ale skáčou)
+- *řídký polynom*: u spousty exponentů je nulový koeficient (exponenty prostě
+  nejdou po 1, ale skáčou)
 
 ```haskell
 data Ridky a = Ridky [(Int, a)]
 ```
 
 Řešení:
+
 ```haskell
 type Order = Int
 type Coeff = Int
@@ -2755,14 +3120,19 @@ summ' (Poly xs) (Poly ys) = Poly $ go xs ys
 Zdroj: [MFF Forum: Zkouška 30. 05. 2016 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=10934)
 
 Pro zadané ``K`` máme generovat nekonečný uspořádáný seznam ``K``-tic:
-uspořádání je definováno tak, že nejprve se třídí podle maximálního prvku v daném seznamu. (jakákoliv ``k``-tice, jejíž maximum je menší nebo rovno ``2`` bude před ``k``-ticí obsahující číslo 3). Když mají dvě k-tice stejné maximum, řadí se lexikograficky.
+uspořádání je definováno tak, že nejprve se třídí podle maximálního prvku v
+daném seznamu. (jakákoliv ``k``-tice, jejíž maximum je menší nebo rovno ``2``
+bude před ``k``-ticí obsahující číslo 3). Když mají dvě k-tice stejné maximum,
+řadí se lexikograficky.
 
 Příklad pro ``K=2``:
+
 ```haskell
 [[0,0],[0,1],[1,0],[1,1],[0,2],[1,2],[2,0],[2,1],[2,2],[0,3] ...]
 ```
 
 Řešení:
+
 ```haskell
 sort :: Ord a => [a] -> [a]
 sort []       = []
@@ -2788,9 +3158,12 @@ maxLex k = concatMap (sort . withMax) [0 ..]
 
 Zdroj: [MFF Forum: Zkouška 30. 05. 2016 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=10934)
 
-Máme zadaný binární vyhledávací strom (reprezentaci si máme zvolit), a dvě čísla ``D``, ``H``. Máme vrátit BVS, který vznikl ořezáním vstupního stromu tak, aby v něm byly pouze hodnoty ``X`` takové, že ``D<=X<=H``.
+Máme zadaný binární vyhledávací strom (reprezentaci si máme zvolit), a dvě
+čísla ``D``, ``H``. Máme vrátit BVS, který vznikl ořezáním vstupního stromu
+tak, aby v něm byly pouze hodnoty ``X`` takové, že ``D<=X<=H``.
 
 Řešení:
+
 ```haskell
 data Tree a = Nil | Tree (Tree a) a (Tree a)
   deriving (Eq, Show)
@@ -2813,19 +3186,30 @@ testTree = Tree
 
 Zdroj: [MFF Forum: Zkouška 12.7.2021](http://forum.matfyz.info/viewtopic.php?f=169&t=12193)
 
-Na vstupu je daný seznam ``S`` obsahující dvojice ``(položka, orientace)``, kde položky jsou obecné informace nějakého typu (například geny v chromozomu), a orientace je typu ``Bool`` (pro sousměrně a protisměrně). Volání funkce ``otoceni S`` má vydat seznam všech výsledků ``[Vs]`` jako seznam seznamů dvojic stejného typu, kde jeden výsledek vznikne otočením nějaké souvislé části ``S``, přičemž v otočené části změníte informaci o směru. Délka otočené části je od ``1`` do délky ``S``, tj. otáčenou spojitou část vybíráte všemi možnými způsoby.
+Na vstupu je daný seznam ``S`` obsahující dvojice ``(položka, orientace)``, kde
+položky jsou obecné informace nějakého typu (například geny v chromozomu), a
+orientace je typu ``Bool`` (pro sousměrně a protisměrně). Volání funkce
+``otoceni S`` má vydat seznam všech výsledků ``[Vs]`` jako seznam seznamů
+dvojic stejného typu, kde jeden výsledek vznikne otočením nějaké souvislé části
+``S``, přičemž v otočené části změníte informaci o směru. Délka otočené části
+je od ``1`` do délky ``S``, tj. otáčenou spojitou část vybíráte všemi možnými
+způsoby.
 
 1. Napište (obecný) typ funkce ``otoceni``
 2. Napište funkci ``otoceni``
-3. Pracovala by Vaše implementace funkce otoceni na nekonečném vstupním seznamu? Šla by napsat správná implementace pro nekonečný seznam? (Stačí myšlenka: proč ano nebo proč ne.)
+3. Pracovala by Vaše implementace funkce otoceni na nekonečném vstupním
+   seznamu? Šla by napsat správná implementace pro nekonečný seznam? (Stačí
+   myšlenka: proč ano nebo proč ne.)
 
 Příklad:
+
 ```haskell
 > otoceni [('a',True),('b',True),('c',False)]
 [[('a',False),('b',True),('c',False)],[('a',True),('b',False),('c',False)],[('b',False),('a',False),('c',False)],[('a',True),('b',True),('c',True)],[('a',True),('c',True),('b',False)],[('c',True),('b',False),('a',False)]]
 ```
 
 Řešení:
+
 ```haskell
 split3 :: [a] -> [([a], [a], [a])]
 split3 as =
@@ -2847,12 +3231,17 @@ otoceni ps = [ xs ++ map flipPair ys ++ zs | (xs, ys, zs) <- split3 ps ]
 ### Převážení binárního stromu II
 
 Je zadán binární strom s vnitřními vrcholy typu
+
 ```haskell
 data Bt a = Void | Node (Bt a) a (Bt a)
 ```
-Definujte funkci ``prevaz`` která projde strom a pro každý vnitřní vrchol prohodí levý a pravý podstrom, pokud je ve vstupním stromě vlevo víc vrcholů než vpravo.
+
+Definujte funkci ``prevaz`` která projde strom a pro každý vnitřní vrchol
+prohodí levý a pravý podstrom, pokud je ve vstupním stromě vlevo víc vrcholů
+než vpravo.
 
 Příklad:
+
 ```haskell
 > prevaz (Node (Node (Node Void 'a' Void) 'b' Void) 'c' (Node Void 'ď Void))
 Node (Node Void 'ď Void) 'c' (Node Void 'b' (Node Void 'a' Void))
@@ -2863,6 +3252,7 @@ Node (Node Void 'ď Void) 'c' (Node Void 'b' (Node Void 'a' Void))
 3. Využíváte někde volání lambda-funkce nebo funkce s neúplně zadanými argumenty?
 
 Řešení:
+
 ```haskell
 data Bt a = Void | Node (Bt a) a (Bt a)
   deriving (Eq, Show)
@@ -2882,12 +3272,18 @@ prevaz' (Node left val right)
 ```
 
 ### Diskvalifikováni sousedi
-Dostanete vstupní graf ``G``, neorientovaný a bez ohodnocení. Vypusťte z něho opakovaně všechny vrcholy, které mají méně sousedů než dané ``k``. Vydejte zbylý graf a seznam vrcholů v poradí, jak jste je vypouštěli.
 
-1. Definujte vhodný typ ``Graf`` a pro graf, který používáte v další definici, přičemž parametr ``a`` je označení vrcholů.
-2. Definujte funkci ``centrumG :: Eq a => Graf a -> Int -> (Graf a, [a])`` pro požadovaný výpočet.
+Dostanete vstupní graf ``G``, neorientovaný a bez ohodnocení. Vypusťte z něho
+opakovaně všechny vrcholy, které mají méně sousedů než dané ``k``. Vydejte
+zbylý graf a seznam vrcholů v poradí, jak jste je vypouštěli.
+
+1. Definujte vhodný typ ``Graf`` a pro graf, který používáte v další definici,
+   přičemž parametr ``a`` je označení vrcholů.
+2. Definujte funkci ``centrumG :: Eq a => Graf a -> Int -> (Graf a, [a])`` pro
+   požadovaný výpočet.
 
 Řešení:
+
 ```haskell
 data Graph a = Graph [(a, [a])]
   deriving (Eq, Show)
@@ -2914,3 +3310,4 @@ centrumG (Graph ps) k = (Graph ansPs, bs)
 
   (ansPs, bs) = unfold degreeAtLeast removeSmallDegree ps
 ```
+
