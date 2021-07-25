@@ -6,7 +6,7 @@
 
 ### Topologické uspořádání grafu
 
-Zdroj: [MFF Forum: Zkoužka 4.9.2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12095&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: Zkoužka 4.9.2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12095)
 
 Je dán orientovaný graf G pomocí seznamů sousedů. Zjistěte, jestli lze graf G
 topologicky uspořádat a pokud ano, vydejte seznam vrcholů v topologickém
@@ -54,7 +54,7 @@ topo_(Graph, Acc, Out) :-
 
 ### Diskrepanční vrstvy
 
-Zdroj: [MFF Forum: Zkoužka 4.9.2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12095&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: Zkoužka 4.9.2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12095)
 
 Napište predikát ``diskr/2``, který dostane binární strom (s konstruktory
 ``t/3`` a ``nil/0``) a vrátí seznam seznamů vrcholů stromu, kde v jednom
@@ -144,7 +144,7 @@ test_tree(
 
 ### Generování binárních stromů
 
-Zdroj: [MFF Forum: Zkouška 16. 7. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12089&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: Zkouška 16. 7. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12089)
 
 Cílem úlohy je definovat predikát allTrees, který pro daný seznam hladin
 vygeneruje všechny možné binární stromy.
@@ -208,7 +208,7 @@ all_trees([Level | Levels], Forest, Ans) :-
 
 ### Bipartitní rozklad grafu
 
-Zdroj: [MFF Forum: Zkouška 16. 7. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12089&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: Zkouška 16. 7. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12089)
 
 Je zadán neorientovaný graf *G* a množina vrcholů *M*. Zjistěte, zda *M* a
 doplněk *M* tvoří bipartitní rozklad grafu *G* (tj. každá hrana grafu má právě
@@ -275,7 +275,7 @@ does_not_contain(List, X) :- \+ member(X, List).
 
 ### Problém truhláře
 
-Zdroj: [MFF Forum: Zkouška 24. 6. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12078&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: Zkouška 24. 6. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12078)
 
 Truhlář má dostatek trámů délky ``D`` a seznam ``Xs`` délek trámů, které
 potřebuje nařezat. V seznamu ``Xs`` se délky mohou opakovat.
@@ -335,7 +335,7 @@ greedy_extend_cut(MaxLength, [ Total-Cuts | Cs ], NextCut, Ans) :-
 
 ### Systém různých reprezentantů
 
-Zdroj: [MFF Forum: Zkouška 24. 6. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12078&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: Zkouška 24. 6. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12078)
 
 Je zadán seznam množin ``Mss``. Chceme všemi možnými způsoby vybrat a vrátit v
 seznamu reprezentanty daných množin v odpovídajícím pořadí s podmínkou, že
@@ -381,7 +381,7 @@ reprezentanti([Xs | Xss], Acc, Ans) :-
 
 ### Hammerstein
 
-Zdroj: [MFF Forum: Zkouška 12. 6. 2020 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=12066&sid=fe143536d7d0b2e925781a412fafbdc7)
+Zdroj: [MFF Forum: Zkouška 12. 6. 2020 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=12066)
 
 Profesor Hammerstein definoval predikat ``setrid/2`` takto:
 
@@ -432,7 +432,7 @@ setrid(Xs, Xs).
 
 ### Cestovatel
 
-Zdroj: [MFF Forum: Zkouška 12. 6. 2020 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=12066&sid=fe143536d7d0b2e925781a412fafbdc7)
+Zdroj: [MFF Forum: Zkouška 12. 6. 2020 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=12066)
 
 Do země Mobilia, v níž je každý občan vybaven chytrým telefonem, přicestoval
 Cestovatel, nakažený virovým onemocněním. Všichni ostatní byli přitom ještě
@@ -517,7 +517,7 @@ inf(ContactsList, K, [ ID-TimeInfected | Ps ], Acc, Ans) :-
 
 ### Generování hodnot výrokových proměnných
 
-Zdroj: [MFF Forum: 10. 9. 2019 - Dvořák](http://forum.matfyz.info/viewtopic.php?f=169&t=11977&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: 10. 9. 2019 - Dvořák](http://forum.matfyz.info/viewtopic.php?f=169&t=11977)
 
 Definujte binární predikát ``aspon2/2``, který
 
@@ -569,7 +569,7 @@ subset_change([Var-Value | Values], Ans) :-
 
 ### Trojúhelníky v grafu
 
-Zdroj: [MFF Forum: 10. 9. 2019 - Dvořák](http://forum.matfyz.info/viewtopic.php?f=169&t=11977&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: 10. 9. 2019 - Dvořák](http://forum.matfyz.info/viewtopic.php?f=169&t=11977)
 
 Graf je zadán jako seznam svých vrcholů se seznamy sousedů (viz příklad).
 Definujte binární predikát ``troj(+Graf, -SeznamTrojuhelniku)`` který k
@@ -657,7 +657,7 @@ troj(Graph, Triangles) :-
 
 ### Generování výrokových formulí
 
-Zdroj: [MFF Forum: 24.6.2019 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=11969&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: 24.6.2019 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=11969)
 
 Formule výrokového počtu jsou sestavené z (výrokových) proměnných ve funktoru
 ``var/1`` a logických spojek negace, konjunkce a disjunkce (bez konstant). Dále
@@ -709,7 +709,7 @@ gen_([_ | Ss], Vars, Ans) :-
 
 ### Koncepty
 
-Zdroj: [MFF Forum: 24.6.2019 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=11969&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: 24.6.2019 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=11969)
 
 Jeden objekt je zadán uspořádaným seznamem dvojic klíč-hodnota. Na vstupu máte
 seznam objektů. Napište proceduru ``koncept/2``, která vyrobí nejmenší koncept
@@ -1891,7 +1891,7 @@ otoceni_(_, Acc, Acc) :- !.
 
 ### Největší součet souvislé podposloupnosti
 
-Zdroj: [MFF Forum: Zkoužka 4.9.2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12095&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: Zkoužka 4.9.2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12095)
 
 1. Pro zadanou posloupnost čísel najděte spojitý úsek, jehož součet je
    největší. Vydejte souřadnice začátku a konce úseku a dosažený součet.
@@ -1942,7 +1942,7 @@ soucty xs = foldr
 
 ### Rekonstrukce binárního stromu
 
-Zdroj: [MFF Forum: Zkoužka 4.9.2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12095&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: Zkoužka 4.9.2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12095)
 
 Binární vyhledávací strom je zadán jako seznam hodnot vrcholů v pořadí
 preorder. Definujte funkci
@@ -1996,7 +1996,7 @@ readBt (x : xs) = Node leftAns x rightAns
 
 ### Rostoucí posloupnosti
 
-Zdroj: [MFF Forum: Zkouška 16. 7. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12089&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: Zkouška 16. 7. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12089)
 
 Cílem je definovat funkci ``ascending,`` která na vstupu obdrží seznam hodnot
 (libovolného typu) a vrátí zpět seznam posloupností, který splňuje:
@@ -2039,7 +2039,7 @@ takeAscending cmp (x1 : x2 : xs) | cmp x1 x2   = (x1 : asc, rest)
 
 ### Stromové operace
 
-Zdroj: [MFF Forum: Zkouška 16. 7. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12089&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: Zkouška 16. 7. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12089)
 
  1. Definujte datový typ pro binární stromy.
     - Hodnoty jsou uloženy ve vnitřních uzlech.
@@ -2092,7 +2092,7 @@ cut n tree = zipWithT const tree (replicateT ((2 ^ n) - 1) undefined)
 
 ### Klouzavé průměry
 
-Zdroj: [MFF Forum: Zkouška 24. 6. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12078&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: Zkouška 24. 6. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12078)
 
 Cílem je definovat binární funkci klouzave, která
 
@@ -2153,7 +2153,7 @@ klouzave2 xs n =
 
 ### Stromovy fold
 
-Zdroj: [MFF Forum: Zkouška 24. 6. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12078&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: Zkouška 24. 6. 2020](http://forum.matfyz.info/viewtopic.php?f=169&t=12078)
 
 Cílem toho problému je zobecnit funkce ``foldr`` / ``foldl`` na obecné kořenové stromy.
 
@@ -2201,7 +2201,7 @@ testTree = Tree
 
 ### Deleni stromu
 
-Zdroj: [MFF Forum: Zkouška 12. 6. 2020 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=12066&sid=fe143536d7d0b2e925781a412fafbdc7)
+Zdroj: [MFF Forum: Zkouška 12. 6. 2020 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=12066)
 
 Rozdělte zadaný binární vyhledávací strom ``T`` na ``n+1`` binárních
 vyhledávacích stromů ``T_0, .. , T_n`` podle zadaných vstupních hodnot ``k_i``,
@@ -2247,7 +2247,7 @@ testTree =
 
 ### Run-length encoding/decoding
 
-Zdroj: [MFF Forum: Zkouška 12. 6. 2020 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=12066&sid=fe143536d7d0b2e925781a412fafbdc7)
+Zdroj: [MFF Forum: Zkouška 12. 6. 2020 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=12066)
 
 Definujte funkce ``rle`` a ``rld``, které realizují run-length encoding a
 decoding. Funkce
@@ -2309,7 +2309,7 @@ rle2 xs =
 
 ### Převody mezi číselnými soustavami
 
-Zdroj: [MFF Forum: 10. 9. 2019 - Dvořák](http://forum.matfyz.info/viewtopic.php?f=169&t=11977&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: 10. 9. 2019 - Dvořák](http://forum.matfyz.info/viewtopic.php?f=169&t=11977)
 
 Definujte funkce:
 
@@ -2380,7 +2380,7 @@ prevod2 n base = reverse $ unfold (== 0) (`moddiv` base) n
 
 ### Řády prvků grupy
 
-Zdroj: [MFF Forum: 10. 9. 2019 - Dvořák](http://forum.matfyz.info/viewtopic.php?f=169&t=11977&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: 10. 9. 2019 - Dvořák](http://forum.matfyz.info/viewtopic.php?f=169&t=11977)
 
 Definujte unární funkci rady, která obdrží multiplikativní tabulku grupy jako
 matici prvků. První řádek matice obsahuje násobení grupovou jednotkou ``e`` a
@@ -2426,7 +2426,7 @@ rady table@(firstRow@(e : _) : _) = zip firstRow (map rad firstRow)
 
 ### Kumulativní součty
 
-Zdroj: [MFF Forum: 24.6.2019 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=11969&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: 24.6.2019 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=11969)
 
 Je dána číselná matice ``A``. Definujte funkci
 
@@ -2472,7 +2472,7 @@ kumulace table = memo
 
 ### Doplnění hypergrafu
 
-Zdroj: [MFF Forum: 24.6.2019 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=11969&sid=fe143536d7d0b2e925781a412fafbdc8)
+Zdroj: [MFF Forum: 24.6.2019 (Dvořák, Hric)](http://forum.matfyz.info/viewtopic.php?f=169&t=11969)
 
 Hypergraf je zadán množinou vrcholů a množinou hyperhran, což jsou alespoň
 dvouprvkové podmnožiny množiny vrcholů. Naší cílem je definovat funkci
